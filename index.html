@@ -171,6 +171,22 @@
   .psc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:13px 8px;text-align:center}.psc .pn{font-family:var(--serif);font-size:25px}.psc .pl{font-size:9px;color:var(--faint);letter-spacing:.06em;text-transform:uppercase;margin-top:3px}
   .ach{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
   .achc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:13px}.achc.win{border-color:rgba(201,169,97,.35);background:var(--gold-soft)}.achc .aci{font-size:22px}.achc .act{font-size:12.5px;font-weight:600;margin-top:6px}.achc .acd{font-size:10px;color:var(--muted);margin-top:2px}.achc .acb{height:3px;background:#1c2129;border-radius:2px;margin-top:8px;overflow:hidden}.achc .acf{height:100%;background:var(--gold);border-radius:2px}
+  .vibra{display:flex;gap:5px;justify-content:space-between;margin-top:4px}
+  .vbtn{flex:1;aspect-ratio:1;border-radius:9px;border:1px solid var(--line);background:var(--panel2);color:var(--muted);font-family:var(--mono);font-size:12px;cursor:pointer;display:grid;place-items:center;padding:0}
+  .vbtn.on{background:linear-gradient(135deg,var(--p1),var(--p2));color:#fff;border-color:transparent}
+  .vibavg{text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:12px}.vibavg b{color:#a892ff;font-size:14px;font-family:var(--serif)}
+  .vbars{display:flex;align-items:flex-end;gap:5px;height:44px;margin-top:10px;justify-content:center}
+  .vbar{width:14px;border-radius:4px 4px 0 0;background:linear-gradient(to top,var(--p1),var(--p2));min-height:3px}
+  .affcard{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--p1);border-radius:12px;padding:12px 13px;margin-top:9px;display:flex;align-items:center;gap:10px}
+  .affcard .at2{flex:1;font-family:var(--serif);font-style:italic;font-size:14.5px;color:#e9e3f5;line-height:1.4}
+  .affcard .add{background:rgba(123,92,255,.15);border:1px solid rgba(123,92,255,.3);color:#a892ff;border-radius:8px;padding:6px 10px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;font-family:var(--sans)}
+  .mtextarea{width:100%;background:#0e1116;border:1px solid var(--line);border-radius:11px;padding:11px;color:var(--ink);font-family:var(--serif);font-style:italic;font-size:15px;resize:vertical;min-height:62px}
+  .dent{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin-top:9px}.dent .dd{font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-bottom:4px}.dent .dx{font-family:var(--serif);font-style:italic;font-size:15px;color:#f1ead7;line-height:1.4}
+  .visadd{display:flex;gap:9px;margin-bottom:4px}.visadd select{flex:1;background:#0e1116;border:1px solid var(--line);border-radius:11px;padding:11px;color:var(--ink);font-family:var(--sans);font-size:13px}.visadd button{background:var(--gold-soft);border:1px solid rgba(201,169,97,.3);color:var(--gold);border-radius:11px;padding:11px 16px;font-weight:600;font-size:13px;cursor:pointer;font-family:var(--sans);white-space:nowrap}
+  .vgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}
+  .vcard{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);aspect-ratio:1}.vcard img{width:100%;height:100%;object-fit:cover;display:block}
+  .vcard .vlab{position:absolute;left:6px;bottom:6px;font-family:var(--mono);font-size:8px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.55);padding:3px 7px;border-radius:6px}
+  .vcard .vdel{position:absolute;top:6px;right:6px;background:rgba(0,0,0,.55);border:0;color:#fff;width:22px;height:22px;border-radius:6px;cursor:pointer;font-size:12px}
 </style>
 </head>
 <body>
@@ -248,6 +264,7 @@
         <div class="hubcard" onclick="go('respira')"><div class="hi">🫁</div><div><div class="hn">Respiración</div><div class="hd">4·7·8, caja, Wim Hof</div></div></div>
         <div class="hubcard" onclick="go('sugestion')"><div class="hi">✨</div><div><div class="hn">Autosugestión</div><div class="hd">Reprograma tu mente</div></div></div>
         <div class="hubcard" onclick="go('progreso')"><div class="hi">📊</div><div><div class="hn">Progreso</div><div class="hd">Rachas y logros</div></div></div>
+        <div class="hubcard" onclick="go('manifest')"><div class="hi">🔮</div><div><div class="hn">Manifestación</div><div class="hd">Atrae tu realidad</div></div></div>
       </div>
       <button class="warbtn" onclick="toggleWar()" style="margin-top:14px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.5 17.5 3 6V3h3l11.5 11.5"/><path d="m13 19 6-6"/><path d="m16 16 4 4"/><path d="m19 21 2-2"/></svg>Modo Guerra</button>
       <button class="notifbtn" onclick="openSettings()">⚙ Ajustes y respaldo</button>
@@ -375,6 +392,26 @@
       <div class="seclabel">Logros</div>
       <div class="ach" id="pAch"></div>
     </section>
+
+    <!-- MANIFESTACIÓN -->
+    <section class="screen" data-screen="manifest">
+      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Sistema</button>
+      <div class="kicker">Manifestación · El Secreto</div>
+      <h1 class="big">Atrae tu <em>realidad</em>.</h1>
+      <div class="seclabel">Vibración de hoy <span class="tag">1–10</span></div>
+      <div class="card"><div class="vibra" id="vibra"></div><div class="vibavg">Promedio semanal · <b id="vibAvg">—</b>/10</div><div class="vbars" id="vbars"></div></div>
+      <div class="seclabel">Afirmaciones automáticas <span class="tag">de tus metas</span></div>
+      <div id="autoAff"></div>
+      <div class="seclabel">Diario de afirmaciones</div>
+      <div class="card"><textarea id="afirTa" class="mtextarea" placeholder="Escribe tu deseo en presente: &quot;Soy…&quot;, &quot;Tengo…&quot;, &quot;Atraigo…&quot;"></textarea><button class="addbtn" onclick="saveAfir()" style="margin-top:10px">Guardar afirmación</button></div>
+      <div id="afirList"></div>
+      <div class="seclabel">Tablero de visión</div>
+      <div class="card">
+        <div class="visadd"><select id="visLayer"></select><button onclick="document.getElementById('visFile').click()">+ Imagen</button></div>
+        <input type="file" id="visFile" accept="image/*" style="display:none" onchange="addVisionImg(this)">
+        <div class="vgrid" id="vgrid"></div>
+      </div>
+    </section>
   </div>
 
   <nav class="nav" id="nav">
@@ -467,6 +504,7 @@ const defaults={
   ],
   diario:[],
   sugestion:{active:'Cada día, hablo con más calma y claridad',reps:0,belief:7,mode:'espejo',formulas:['Confío en mi capacidad de resolver lo que venga','Estoy en calma, estoy bien, estoy aquí']},
+  manifest:{vibra:[{t:isoAgo(1),val:7},{t:isoAgo(2),val:6},{t:isoAgo(3),val:8},{t:isoAgo(4),val:7}],afir:[{t:isoAgo(1),text:'Soy un trader disciplinado, paciente y rentable.'}],vision:[]},
   war:['Dormir 7h','Ejercicio','Trading con plan','Empresa principal (Tequio)'],
   focus:{sessions:0,min:0,dur:25,track:0,vol:0.18,log:[]},
   people:[
@@ -483,10 +521,10 @@ const defaults={
   ]
 };
 let state=load();
-function load(){let m=JSON.parse(JSON.stringify(defaults));try{const s=JSON.parse(localStorage.getItem(KEY));if(s){for(const k in s)m[k]=s[k];m.profile=Object.assign({},defaults.profile,s.profile||{});m.focus=Object.assign({},defaults.focus,s.focus||{});m.finance=Object.assign({},defaults.finance,s.finance||{});m.ideal=Object.assign({},defaults.ideal,s.ideal||{});m.sugestion=Object.assign({},defaults.sugestion,s.sugestion||{});['layers','movimientos','timeLog','diario','war','people','trades'].forEach(k=>{if(!Array.isArray(m[k])||(!m[k].length&&defaults[k].length))m[k]=defaults[k]})}}catch(e){}m.trades.forEach(t=>{if(t.plan===undefined)t.plan=!(t.emo==='FOMO'||t.emo==='Revancha')});m.people.forEach(p=>{if(!Array.isArray(p.seeds))p.seeds=[]});return m}
+function load(){let m=JSON.parse(JSON.stringify(defaults));try{const s=JSON.parse(localStorage.getItem(KEY));if(s){for(const k in s)m[k]=s[k];m.profile=Object.assign({},defaults.profile,s.profile||{});m.focus=Object.assign({},defaults.focus,s.focus||{});m.finance=Object.assign({},defaults.finance,s.finance||{});m.ideal=Object.assign({},defaults.ideal,s.ideal||{});m.sugestion=Object.assign({},defaults.sugestion,s.sugestion||{});m.manifest=Object.assign({},defaults.manifest,s.manifest||{});['vibra','afir','vision'].forEach(k=>{if(!Array.isArray(m.manifest[k]))m.manifest[k]=[]});['layers','movimientos','timeLog','diario','war','people','trades'].forEach(k=>{if(!Array.isArray(m[k])||(!m[k].length&&defaults[k].length))m[k]=defaults[k]})}}catch(e){}m.trades.forEach(t=>{if(t.plan===undefined)t.plan=!(t.emo==='FOMO'||t.emo==='Revancha')});m.people.forEach(p=>{if(!Array.isArray(p.seeds))p.seeds=[]});return m}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2000)}
-function go(s){document.querySelectorAll('.screen').forEach(x=>x.classList.toggle('active',x.dataset.screen===s));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.nav===s));document.getElementById('view').scrollTop=0;if(s==='insights')renderInsights();if(s==='tiempo')renderTiempoScreen();if(s==='capital')renderCapital();if(s==='capas')drawRadar();if(s==='trading')renderReplay();if(s==='hipnosis')renderHypno();if(s!=='hipnosis')stopHypno();if(s==='respira')renderBreath();if(s!=='respira')stopBreath();if(s==='sugestion')renderSug();if(s==='progreso')renderProgreso()}
+function go(s){document.querySelectorAll('.screen').forEach(x=>x.classList.toggle('active',x.dataset.screen===s));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.nav===s));document.getElementById('view').scrollTop=0;if(s==='insights')renderInsights();if(s==='tiempo')renderTiempoScreen();if(s==='capital')renderCapital();if(s==='capas')drawRadar();if(s==='trading')renderReplay();if(s==='hipnosis')renderHypno();if(s!=='hipnosis')stopHypno();if(s==='respira')renderBreath();if(s!=='respira')stopBreath();if(s==='sugestion')renderSug();if(s==='progreso')renderProgreso();if(s==='manifest')renderManifest()}
 const money=n=>'$'+Math.round(n).toLocaleString('en-US');
 const layerName=id=>{const l=state.layers.find(x=>x.id===id);return l?l.name:'—'};
 function finishOnboard(){state.profile.name=document.getElementById('obName').value.trim();const mi=document.getElementById('obMission').value.trim();if(mi)state.profile.mission=mi;state.profile.onboarded=true;save();document.getElementById('onboard').classList.remove('open');renderProfile();renderNorte()}
@@ -630,6 +668,23 @@ function setMode(m){state.sugestion.mode=m;save();renderSug()}
 function activateF(i){if(i===0)return;const s=state.sugestion;const arr=[s.active].concat(s.formulas);const chosen=arr[i];arr.splice(i,1);s.active=chosen;s.formulas=arr;s.reps=0;save();renderSug();toast('Fórmula activada')}
 function addFormula(){const f=prompt('Nueva fórmula (positiva, en presente, breve):');if(f&&f.trim()){state.sugestion.formulas.unshift(f.trim());save();renderSug();toast('Fórmula guardada')}}
 function renderProgreso(){const conPlan=state.trades.filter(t=>t.type==='tomado'&&t.plan).length;const ses=state.focus.sessions;const semillas=state.people.reduce((a,p)=>a+(p.seeds||[]).length,0);document.getElementById('pStats').innerHTML=`<div class="psc"><div class="pn" style="color:var(--gold)">${ses}</div><div class="pl">Sesiones</div></div><div class="psc"><div class="pn">${state.trades.length}</div><div class="pl">Trades</div></div><div class="psc"><div class="pn" style="color:var(--green)">${semillas}</div><div class="pl">Semillas</div></div>`;const ach=[['🎯','Disciplina de acero',conPlan,5,'5 trades con plan'],['📓','Cronista',state.diario.length,7,'7 entradas de diario'],['🧘','Enfoque profundo',ses,10,'10 sesiones de enfoque'],['🌱','Sembrador',semillas,5,'5 semillas de impacto'],['🧭','Visionario',state.layers.filter(l=>l.goals.y10).length,6,'meta a 10 años en 6 capas'],['💰','Primer millón',Math.round(state.finance.patrimonio/1e6*100),100,'llegar a $1M']];document.getElementById('pAch').innerHTML=ach.map(([i,t,v,g,d])=>{const pct=Math.min(100,v/g*100),win=v>=g;return `<div class="achc ${win?'win':''}"><div class="aci">${i}</div><div class="act">${t}</div><div class="acd">${win?'¡Logrado! ✦':d}</div><div class="acb"><div class="acf" style="width:${pct}%"></div></div></div>`}).join('')}
+function mIsToday(iso){const x=new Date(iso),d=new Date();return x.getDate()===d.getDate()&&x.getMonth()===d.getMonth()&&x.getFullYear()===d.getFullYear()}
+function vibToday(){return state.manifest.vibra.find(v=>mIsToday(v.t))}
+function setVibra(val){const e=vibToday();if(e)e.val=val;else state.manifest.vibra.push({t:new Date().toISOString(),val});if(state.manifest.vibra.length>90)state.manifest.vibra.shift();save();renderVibra();toast('Vibración de hoy: '+val+'/10')}
+function vibAvg(){const w=state.manifest.vibra.filter(v=>(Date.now()-new Date(v.t))<7*DAY);if(!w.length)return null;return w.reduce((a,v)=>a+v.val,0)/w.length}
+function renderVibra(){const cur=vibToday(),C=document.getElementById('vibra');let h='';for(let i=1;i<=10;i++)h+=`<button class="vbtn ${cur&&cur.val===i?'on':''}" onclick="setVibra(${i})">${i}</button>`;C.innerHTML=h;const a=vibAvg();document.getElementById('vibAvg').textContent=a==null?'—':a.toFixed(1);const w=state.manifest.vibra.slice(-7);document.getElementById('vbars').innerHTML=w.length?w.map(v=>`<div class="vbar" style="height:${Math.max(3,v.val/10*44)}px"></div>`).join(''):'<span style="color:var(--faint);font-size:11px">Registra tu vibración cada día</span>'}
+let autoList=[];
+function genAuto(){const f=state.finance,next=f.milestones.find(m=>m>f.patrimonio)||f.milestones[f.milestones.length-1],n=Math.round(next/1e6),lab=next>=1e9?'mil millones':(n===1?'primer millón':n+' millones');const out=['Estoy atrayendo mi '+lab+' con cada trade disciplinado.','El dinero llega a mí en proporción al valor que creo.','Soy un trader rentable, paciente y disciplinado.','Mi patrimonio crece con calma y constancia cada día.'];state.layers.filter(l=>l.goals.anual).slice(0,2).forEach(l=>out.push('Cada día me acerco a '+l.goals.anual.toLowerCase().replace(/\.$/,'')+'.'));return out}
+function renderAuto(){autoList=genAuto();document.getElementById('autoAff').innerHTML=autoList.map((a,i)=>`<div class="affcard"><div class="at2">"${a}"</div><button class="add" onclick="useAuto(${i})">+ diario</button></div>`).join('')}
+function useAuto(i){const t=autoList[i];if(!t)return;state.manifest.afir.unshift({t:new Date().toISOString(),text:t});save();renderAfir();toast('Agregada al diario')}
+function saveAfir(){const t=document.getElementById('afirTa').value.trim();if(!t){toast('Escribe tu afirmación');return}state.manifest.afir.unshift({t:new Date().toISOString(),text:t});save();document.getElementById('afirTa').value='';renderAfir();toast('Afirmación guardada ✦')}
+function renderAfir(){const L=document.getElementById('afirList');L.innerHTML=state.manifest.afir.map((a,i)=>{const d=new Date(a.t);return `<div class="dent"><div class="dd">${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()}<span onclick="delAfir(${i})" style="float:right;cursor:pointer">✕</span></div><div class="dx">"${a.text}"</div></div>`}).join('')}
+function delAfir(i){state.manifest.afir.splice(i,1);save();renderAfir()}
+function renderVisLayers(){document.getElementById('visLayer').innerHTML=state.layers.map(l=>`<option value="${l.id}">${l.name}</option>`).join('')}
+function addVisionImg(input){const fl=input.files[0];if(!fl)return;const layer=document.getElementById('visLayer').value;const rd=new FileReader();rd.onload=function(e){const img=new Image();img.onload=function(){const max=640;let w=img.width,h=img.height;if(w>h&&w>max){h=Math.round(h*max/w);w=max}else if(h>max){w=Math.round(w*max/h);h=max}const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);let data;try{data=c.toDataURL('image/jpeg',0.72)}catch(err){data=e.target.result}state.manifest.vision.unshift({img:data,layer:layer,t:Date.now()});try{save();renderVision();toast('Imagen agregada al tablero')}catch(err){state.manifest.vision.shift();toast('Sin espacio: borra alguna imagen o exporta tu respaldo')}};img.src=e.target.result};rd.readAsDataURL(fl);input.value=''}
+function renderVision(){const G=document.getElementById('vgrid');if(!state.manifest.vision.length){G.innerHTML='<span style="color:var(--faint);font-size:12px;grid-column:1/-1;text-align:center;padding:8px 0">Sube imágenes de lo que quieres atraer.</span>';return}G.innerHTML=state.manifest.vision.map((v,i)=>`<div class="vcard"><img src="${v.img}"><span class="vlab">${layerName(v.layer)}</span><button class="vdel" onclick="delVision(${i})">✕</button></div>`).join('')}
+function delVision(i){state.manifest.vision.splice(i,1);save();renderVision()}
+function renderManifest(){renderVibra();renderAuto();renderAfir();renderVisLayers();renderVision()}
 function tick(){const d=new Date(),dias=['DOMINGO','LUNES','MARTES','MIÉRCOLES','JUEVES','VIERNES','SÁBADO'];const hh=d.getHours(),mm=String(d.getMinutes()).padStart(2,'0');document.getElementById('norteKicker').innerHTML=`${dias[d.getDay()]} · ${hh}:${mm} · <span class="live">EN VIVO</span>`;document.getElementById('sbTime').textContent=hh+':'+mm}
 function initRender(){renderProfile();renderNorte();drawRadar();renderLayers();renderTrading();renderGhosts();renderGente();renderTracks();renderFStat();renderDiario();renderCapital();document.querySelectorAll('.tpre button').forEach(b=>b.classList.toggle('on',Number(b.textContent)===state.focus.dur));document.getElementById('vol').value=Math.round(state.focus.vol*100);document.getElementById('volN').textContent=Math.round(state.focus.vol*100);selectTrack(state.focus.track);remaining=state.focus.dur*60;paintRing()}
 function init(){initRender();tick();setInterval(tick,15000);if(!state.profile.onboarded)document.getElementById('onboard').classList.add('open');else setTimeout(checkReminders,1200);if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{})}
