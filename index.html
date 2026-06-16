@@ -140,6 +140,18 @@
   .setrow{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line)}.setrow:last-of-type{border:0}.setrow .l{font-weight:600;font-size:14px}.setrow .d{color:var(--muted);font-size:11.5px;margin-top:2px}.setrow button{background:var(--panel);border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:9px 14px;font-family:var(--sans);font-weight:600;font-size:12.5px;cursor:pointer;white-space:nowrap}.setrow button.danger{color:var(--red);border-color:rgba(240,115,107,.3)}
   .toast{position:absolute;left:50%;bottom:100px;transform:translateX(-50%) translateY(20px);background:var(--gold);color:#1a1305;font-weight:700;font-size:13px;padding:11px 18px;border-radius:12px;opacity:0;transition:.3s;z-index:40;pointer-events:none;max-width:80%;text-align:center}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
   .ob{position:absolute;inset:0;background:linear-gradient(180deg,#0c0e13,#070809);display:none;flex-direction:column;justify-content:center;padding:34px 28px;z-index:50;overflow-y:auto}.ob.open{display:flex}.ob .logo{font-family:var(--serif);font-style:italic;color:var(--gold);font-size:15px;letter-spacing:.05em}.ob h2{font-family:var(--serif);font-size:28px;font-weight:600;margin:14px 0 6px;line-height:1.2}.ob p{color:var(--muted);font-size:14px;line-height:1.5;margin-bottom:20px}.ob label{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);display:block;margin-bottom:7px}.ob input,.ob textarea{width:100%;background:#0e1116;border:1px solid var(--line);border-radius:11px;padding:13px;color:var(--ink);font-family:var(--sans);font-size:15px;margin-bottom:16px}.ob textarea{font-family:var(--serif);font-style:italic;min-height:80px;resize:vertical}
+  .hseg{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:16px 0}
+  .hsess{font-size:11.5px;font-weight:600;padding:8px 13px;border-radius:18px;border:1px solid var(--line);background:var(--panel);color:var(--muted);cursor:pointer}.hsess.on{background:rgba(123,92,255,.16);border-color:var(--p1);color:#a892ff}
+  .orb{width:190px;height:190px;border-radius:50%;margin:18px auto;background:radial-gradient(circle at 50% 42%,rgba(192,76,224,.6),rgba(123,92,255,.22) 60%,transparent 73%);display:grid;place-items:center}
+  .orb.breathe{animation:breathe 11s ease-in-out infinite}
+  @keyframes breathe{0%,100%{transform:scale(.72);opacity:.7}50%{transform:scale(1.06);opacity:1}}
+  .orb .ph{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:#e7defb}
+  .hscript{min-height:64px;text-align:center;font-family:var(--serif);font-size:18px;font-style:italic;color:#e9e3f5;line-height:1.5;margin:8px 6px 4px;transition:opacity .35s}
+  .hctrl{display:flex;gap:10px;justify-content:center;margin-top:6px}
+  .hctrl button{border:0;border-radius:12px;padding:12px 30px;font-family:var(--sans);font-weight:700;font-size:14px;cursor:pointer}
+  .hstart{background:linear-gradient(135deg,var(--p1),var(--p2));color:#fff}.hstop{background:var(--panel2);border:1px solid var(--line);color:var(--muted)}
+  .hvoice{display:flex;align-items:center;gap:8px;justify-content:center;color:var(--muted);font-size:12px;margin-top:14px}
+  .hnote{text-align:center;color:var(--faint);font-size:11px;margin-top:14px;line-height:1.5;padding:0 10px}
 </style>
 </head>
 <body>
@@ -263,6 +275,7 @@
       <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Sistema</button>
       <div class="kicker">Enfoque · Trabajo profundo</div>
       <h1 class="big" style="font-family:var(--sans);font-weight:700;font-size:28px">Enfoque</h1>
+      <div class="launch" onclick="go('hipnosis')" style="margin-top:12px;background:linear-gradient(100deg,rgba(192,76,224,.2),rgba(123,92,255,.08))"><div class="play" style="background:linear-gradient(135deg,#c04ce0,#7b5cff)">🌀</div><div><div class="tt">Modo Hipnosis</div><div class="ss">Sugestión guiada + binaurales theta</div></div></div>
       <div class="timer"><div class="ring" id="ring"><div class="tt"><div class="num" id="timerNum">25:00</div><div class="lb" id="timerLb">Flow State</div></div></div></div>
       <div class="tctrl"><button class="main" id="timerBtn" onclick="toggleTimer()">Iniciar</button><button onclick="resetTimer()">Reiniciar</button></div>
       <div class="tpre"><button onclick="setDur(15,this)">15</button><button class="on" onclick="setDur(25,this)">25</button><button onclick="setDur(50,this)">50</button></div>
@@ -289,6 +302,19 @@
       <div class="kicker">Diálogo interno</div>
       <h1 class="big">Tu <em>mente</em>.</h1>
       <div class="seclabel">Tus fantasmas</div><div id="ghostList"></div>
+    </section>
+
+    <!-- HIPNOSIS -->
+    <section class="screen" data-screen="hipnosis">
+      <button class="backbtn" onclick="go('enfoque')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Enfoque</button>
+      <div class="kicker">Trance · sugestión guiada</div>
+      <h1 class="big">Hipnosis.</h1>
+      <div class="hseg" id="hSess"></div>
+      <div class="orb" id="orb"><span class="ph" id="orbPh">Listo</span></div>
+      <div class="hscript" id="hScript">Elige una sesión y presiona Empezar. Ponte cómodo, en un lugar tranquilo.</div>
+      <div class="hctrl"><button class="hstart" id="hBtn" onclick="toggleHypno()">Empezar</button></div>
+      <div class="hvoice"><label style="cursor:pointer"><input type="checkbox" id="hVoiceChk" checked onchange="hVoice=this.checked" style="accent-color:var(--p1)"> Voz guía (lee en voz alta)</label></div>
+      <div class="hnote">Usa audífonos para sentir los binaurales. No lo uses manejando ni operando maquinaria. Es relajación guiada, no terapia médica.</div>
     </section>
   </div>
 
@@ -400,7 +426,7 @@ let state=load();
 function load(){let m=JSON.parse(JSON.stringify(defaults));try{const s=JSON.parse(localStorage.getItem(KEY));if(s){for(const k in s)m[k]=s[k];m.profile=Object.assign({},defaults.profile,s.profile||{});m.focus=Object.assign({},defaults.focus,s.focus||{});m.finance=Object.assign({},defaults.finance,s.finance||{});m.ideal=Object.assign({},defaults.ideal,s.ideal||{});['layers','movimientos','timeLog','diario','war','people','trades'].forEach(k=>{if(!Array.isArray(m[k])||(!m[k].length&&defaults[k].length))m[k]=defaults[k]})}}catch(e){}m.trades.forEach(t=>{if(t.plan===undefined)t.plan=!(t.emo==='FOMO'||t.emo==='Revancha')});m.people.forEach(p=>{if(!Array.isArray(p.seeds))p.seeds=[]});return m}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2000)}
-function go(s){document.querySelectorAll('.screen').forEach(x=>x.classList.toggle('active',x.dataset.screen===s));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.nav===s));document.getElementById('view').scrollTop=0;if(s==='insights')renderInsights();if(s==='tiempo')renderTiempoScreen();if(s==='capital')renderCapital();if(s==='capas')drawRadar();if(s==='trading')renderReplay()}
+function go(s){document.querySelectorAll('.screen').forEach(x=>x.classList.toggle('active',x.dataset.screen===s));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.nav===s));document.getElementById('view').scrollTop=0;if(s==='insights')renderInsights();if(s==='tiempo')renderTiempoScreen();if(s==='capital')renderCapital();if(s==='capas')drawRadar();if(s==='trading')renderReplay();if(s==='hipnosis')renderHypno();if(s!=='hipnosis')stopHypno()}
 const money=n=>'$'+Math.round(n).toLocaleString('en-US');
 const layerName=id=>{const l=state.layers.find(x=>x.id===id);return l?l.name:'—'};
 function finishOnboard(){state.profile.name=document.getElementById('obName').value.trim();const mi=document.getElementById('obMission').value.trim();if(mi)state.profile.mission=mi;state.profile.onboarded=true;save();document.getElementById('onboard').classList.remove('open');renderProfile();renderNorte()}
@@ -513,6 +539,21 @@ function closeSettings(){document.getElementById('modalSettings').classList.remo
 function exportData(){const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='brujula-backup.json';a.click();toast('Respaldo descargado')}
 function importData(e){const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{const d=JSON.parse(rd.result);if(!d.trades&&!d.layers)throw 0;state=Object.assign(JSON.parse(JSON.stringify(defaults)),d);save();closeSettings();initRender();toast('Datos importados')}catch(err){toast('Archivo no válido')}};rd.readAsText(f)}
 function resetAll(){if(!confirm('¿Borrar todo?'))return;localStorage.removeItem(KEY);location.reload()}
+const hypno=[
+ {id:'foco',n:'Enfoque profundo',base:160,beat:6,lines:['Acomódate. Suelta los hombros. Cierra los ojos si quieres.','Inhala lento por la nariz, y suelta el aire despacio.','Con cada exhalación, tu cuerpo pesa un poco más.','Las distracciones se alejan como nubes que pasan.','No tienes que sostenerlas. Déjalas ir.','Tu mente se vuelve clara, afilada, presente.','Solo existe lo que importa, aquí y ahora.','Sientes una corriente de enfoque subir por tu espalda.','Estás listo para entrar en flujo.','Cuando cuente tres, abrirás los ojos con foco total. Uno, dos, tres.']},
+ {id:'trader',n:'Mentalidad de acero',base:150,beat:5,lines:['Respira hondo. Vas a operar desde la calma.','Sueltas la prisa y la necesidad de tener razón.','Tu plan ya está escrito. Solo lo ejecutas.','El miedo y la avaricia pasan por ti, pero no te mueven.','Aceptas el riesgo definido, y sueltas el resultado.','Una pérdida no te toca. Es el costo del negocio.','Esperas tu setup con la paciencia de un cazador.','Eres disciplina en movimiento.','El mercado no te controla. Tú controlas tu respuesta.','Abres los ojos siendo el trader que respeta su plan.']},
+ {id:'descanso',n:'Descanso reparador',base:140,beat:3,lines:['Recuéstate. Deja que el peso de tu cuerpo se hunda.','Respira lento; cada exhalación te lleva más abajo.','Relaja la frente, la mandíbula, los hombros.','Suelta los brazos, las piernas, los pies.','El día terminó. No hay nada más que hacer.','Tu mente baja el volumen, como una marea que se retira.','Estás seguro. Estás en paz.','Con cada número bajas más: diez, nueve, ocho.','Siete, seis, cinco; te hundes en el descanso.','Cuatro, tres, dos, uno. Descansa.']},
+ {id:'confianza',n:'Confianza imparable',base:170,beat:7,lines:['Endereza la espalda. Respira hacia el pecho.','Recuerda algo que lograste con esfuerzo.','Esa fuerza sigue dentro de ti, ahora mismo.','Eres capaz. Lo has demostrado antes.','El miedo es solo energía esperando dirección.','Caminas hacia lo que temes, y se hace pequeño.','Tu palabra vale. Tu trabajo construye.','Mereces lo que estás creando.','Hoy actúas como la persona que quieres ser.','Abres los ojos imparable.']}
+];
+let hSel='foco',hRunning=false,hVoice=true,hIdx=0,hTimer=null,hypNodes=[],hypGain=null;
+function renderHypno(){document.getElementById('hSess').innerHTML=hypno.map(h=>`<div class="hsess ${h.id===hSel?'on':''}" onclick="pickHypno('${h.id}')">${h.n}</div>`).join('')}
+function pickHypno(id){if(hRunning)return;hSel=id;renderHypno()}
+function startHypAudio(s){try{ensureCtx();hypGain=actx.createGain();hypGain.gain.value=0.1;hypGain.connect(actx.destination);const merger=actx.createChannelMerger(2);const l=actx.createOscillator(),r=actx.createOscillator();l.frequency.value=s.base;r.frequency.value=s.base+s.beat;l.connect(merger,0,0);r.connect(merger,0,1);merger.connect(hypGain);l.start();r.start();hypNodes=[l,r]}catch(e){}}
+function stopHypAudio(){hypNodes.forEach(n=>{try{n.stop()}catch(e){}try{n.disconnect()}catch(e){}});hypNodes=[]}
+function hspeak(text){if(!hVoice||!('speechSynthesis'in window))return;try{const u=new SpeechSynthesisUtterance(text);const v=speechSynthesis.getVoices().find(x=>x.lang&&x.lang.toLowerCase().indexOf('es')===0);if(v)u.voice=v;u.lang='es-MX';u.rate=.82;u.pitch=.92;speechSynthesis.speak(u)}catch(e){}}
+function toggleHypno(){if(hRunning){stopHypno();return}const s=hypno.find(h=>h.id===hSel);if(!s)return;hRunning=true;hIdx=0;const b=document.getElementById('hBtn');b.textContent='Detener';b.className='hstop';document.getElementById('orb').classList.add('breathe');document.getElementById('orbPh').textContent='Respira';startHypAudio(s);hnext(s)}
+function hnext(s){if(!hRunning)return;if(hIdx>=s.lines.length){document.getElementById('hScript').textContent='✦';document.getElementById('orbPh').textContent='Listo';hTimer=setTimeout(()=>{if(hRunning)stopHypno()},3500);return}const line=s.lines[hIdx++];const el=document.getElementById('hScript');el.style.opacity=0;setTimeout(()=>{el.textContent=line;el.style.opacity=1},300);hspeak(line);hTimer=setTimeout(()=>hnext(s),Math.max(4800,line.length*95))}
+function stopHypno(){if(!hRunning&&!hypNodes.length)return;hRunning=false;clearTimeout(hTimer);if('speechSynthesis'in window){try{speechSynthesis.cancel()}catch(e){}}stopHypAudio();const b=document.getElementById('hBtn');if(b){b.textContent='Empezar';b.className='hstart'}const o=document.getElementById('orb');if(o)o.classList.remove('breathe');const ph=document.getElementById('orbPh');if(ph)ph.textContent='Listo'}
 function tick(){const d=new Date(),dias=['DOMINGO','LUNES','MARTES','MIÉRCOLES','JUEVES','VIERNES','SÁBADO'];const hh=d.getHours(),mm=String(d.getMinutes()).padStart(2,'0');document.getElementById('norteKicker').innerHTML=`${dias[d.getDay()]} · ${hh}:${mm} · <span class="live">EN VIVO</span>`;document.getElementById('sbTime').textContent=hh+':'+mm}
 function initRender(){renderProfile();renderNorte();drawRadar();renderLayers();renderTrading();renderGhosts();renderGente();renderTracks();renderFStat();renderDiario();renderCapital();document.querySelectorAll('.tpre button').forEach(b=>b.classList.toggle('on',Number(b.textContent)===state.focus.dur));document.getElementById('vol').value=Math.round(state.focus.vol*100);document.getElementById('volN').textContent=Math.round(state.focus.vol*100);selectTrack(state.focus.track);remaining=state.focus.dur*60;paintRing()}
 function init(){initRender();tick();setInterval(tick,15000);if(!state.profile.onboarded)document.getElementById('onboard').classList.add('open');else setTimeout(checkReminders,1200);if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{})}
