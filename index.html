@@ -152,6 +152,25 @@
   .hstart{background:linear-gradient(135deg,var(--p1),var(--p2));color:#fff}.hstop{background:var(--panel2);border:1px solid var(--line);color:var(--muted)}
   .hvoice{display:flex;align-items:center;gap:8px;justify-content:center;color:var(--muted);font-size:12px;margin-top:14px}
   .hnote{text-align:center;color:var(--faint);font-size:11px;margin-top:14px;line-height:1.5;padding:0 10px}
+  .btech{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:8px}
+  .btc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px;cursor:pointer}.btc.on{border-color:var(--blue);background:rgba(74,163,255,.08)}
+  .btc .bt{font-weight:600;font-size:13px}.btc .bd{font-size:10.5px;color:var(--muted);margin-top:2px}.btc .bb{font-family:var(--mono);font-size:8px;letter-spacing:.08em;color:var(--blue);background:rgba(74,163,255,.12);padding:2px 7px;border-radius:6px;display:inline-block;margin-top:6px}
+  .borbwrap{display:grid;place-items:center;margin:18px auto}
+  .borb{width:130px;height:130px;border-radius:50%;background:radial-gradient(circle at 38% 35%,rgba(74,163,255,.6),rgba(95,207,142,.22) 60%,transparent 74%);transition:transform 4s ease-in-out;display:grid;place-items:center}
+  .borb .bph{font-family:var(--serif);font-size:19px;color:#dfe8ff}
+  .bcount{text-align:center;font-family:var(--serif);font-size:40px;color:var(--blue);margin-top:4px}
+  .bcoh{text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:6px}
+  .formula{text-align:center;font-family:var(--serif);font-style:italic;font-size:21px;color:#f1ead7;line-height:1.4;margin:6px 0}
+  .repbtn{width:160px;height:160px;border-radius:50%;margin:16px auto;display:grid;place-items:center;text-align:center;background:radial-gradient(circle at 40% 35%,rgba(201,169,97,.32),rgba(201,169,97,.04) 65%,transparent);border:1px solid rgba(201,169,97,.3);cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}
+  .repbtn .rn{font-family:var(--serif);font-size:50px;color:var(--gold);line-height:1}.repbtn .rl{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;color:var(--faint);text-transform:uppercase;margin-top:6px}
+  .belief{display:flex;align-items:center;gap:10px;margin-top:6px;color:var(--muted);font-size:11px}.belief input{flex:1;accent-color:var(--gold)}
+  .modes{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:6px}
+  .modec{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:11px;text-align:center;cursor:pointer}.modec.on{border-color:var(--gold);background:var(--gold-soft)}.modec .mi2{font-size:20px}.modec .mt2{font-size:12px;font-weight:600;margin-top:4px}.modec .md2{font-size:9.5px;color:var(--muted);margin-top:1px}
+  .fitem{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin-top:9px;cursor:pointer}.fitem.on{border-color:var(--gold)}.fitem .fnum{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--gold)}.fitem .ftx{font-family:var(--serif);font-style:italic;font-size:15px;margin-top:3px}
+  .pstat{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-top:8px}
+  .psc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:13px 8px;text-align:center}.psc .pn{font-family:var(--serif);font-size:25px}.psc .pl{font-size:9px;color:var(--faint);letter-spacing:.06em;text-transform:uppercase;margin-top:3px}
+  .ach{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+  .achc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:13px}.achc.win{border-color:rgba(201,169,97,.35);background:var(--gold-soft)}.achc .aci{font-size:22px}.achc .act{font-size:12.5px;font-weight:600;margin-top:6px}.achc .acd{font-size:10px;color:var(--muted);margin-top:2px}.achc .acb{height:3px;background:#1c2129;border-radius:2px;margin-top:8px;overflow:hidden}.achc .acf{height:100%;background:var(--gold);border-radius:2px}
 </style>
 </head>
 <body>
@@ -226,6 +245,9 @@
         <div class="hubcard" onclick="go('enfoque')"><div class="hi">🎧</div><div><div class="hn">Enfoque</div><div class="hd">Trabajo profundo</div></div></div>
         <div class="hubcard" onclick="go('gente')"><div class="hi">👥</div><div><div class="hn">Gente</div><div class="hd">Semillas de impacto</div></div></div>
         <div class="hubcard" onclick="go('mente')"><div class="hi">👻</div><div><div class="hn">Mente</div><div class="hd">Tus fantasmas</div></div></div>
+        <div class="hubcard" onclick="go('respira')"><div class="hi">🫁</div><div><div class="hn">Respiración</div><div class="hd">4·7·8, caja, Wim Hof</div></div></div>
+        <div class="hubcard" onclick="go('sugestion')"><div class="hi">✨</div><div><div class="hn">Autosugestión</div><div class="hd">Reprograma tu mente</div></div></div>
+        <div class="hubcard" onclick="go('progreso')"><div class="hi">📊</div><div><div class="hn">Progreso</div><div class="hd">Rachas y logros</div></div></div>
       </div>
       <button class="warbtn" onclick="toggleWar()" style="margin-top:14px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.5 17.5 3 6V3h3l11.5 11.5"/><path d="m13 19 6-6"/><path d="m16 16 4 4"/><path d="m19 21 2-2"/></svg>Modo Guerra</button>
       <button class="notifbtn" onclick="openSettings()">⚙ Ajustes y respaldo</button>
@@ -276,6 +298,7 @@
       <div class="kicker">Enfoque · Trabajo profundo</div>
       <h1 class="big" style="font-family:var(--sans);font-weight:700;font-size:28px">Enfoque</h1>
       <div class="launch" onclick="go('hipnosis')" style="margin-top:12px;background:linear-gradient(100deg,rgba(192,76,224,.2),rgba(123,92,255,.08))"><div class="play" style="background:linear-gradient(135deg,#c04ce0,#7b5cff)">🌀</div><div><div class="tt">Modo Hipnosis</div><div class="ss">Sugestión guiada + binaurales theta</div></div></div>
+      <div class="launch" onclick="go('respira')" style="margin-top:10px;background:linear-gradient(100deg,rgba(74,163,255,.16),rgba(95,207,142,.07));border-color:rgba(74,163,255,.3)"><div class="play" style="background:linear-gradient(135deg,#4aa3ff,#5fcf8e)">🫁</div><div><div class="tt">Respiración guiada</div><div class="ss">4·7·8 · Caja · Coherencia · Wim Hof</div></div></div>
       <div class="timer"><div class="ring" id="ring"><div class="tt"><div class="num" id="timerNum">25:00</div><div class="lb" id="timerLb">Flow State</div></div></div></div>
       <div class="tctrl"><button class="main" id="timerBtn" onclick="toggleTimer()">Iniciar</button><button onclick="resetTimer()">Reiniciar</button></div>
       <div class="tpre"><button onclick="setDur(15,this)">15</button><button class="on" onclick="setDur(25,this)">25</button><button onclick="setDur(50,this)">50</button></div>
@@ -315,6 +338,42 @@
       <div class="hctrl"><button class="hstart" id="hBtn" onclick="toggleHypno()">Empezar</button></div>
       <div class="hvoice"><label style="cursor:pointer"><input type="checkbox" id="hVoiceChk" checked onchange="hVoice=this.checked" style="accent-color:var(--p1)"> Voz guía (lee en voz alta)</label></div>
       <div class="hnote">Usa audífonos para sentir los binaurales. No lo uses manejando ni operando maquinaria. Es relajación guiada, no terapia médica.</div>
+    </section>
+
+    <!-- RESPIRACIÓN -->
+    <section class="screen" data-screen="respira">
+      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Sistema</button>
+      <div class="kicker">Coherencia · HRV</div>
+      <h1 class="big">Respira con <em>intención</em>.</h1>
+      <div class="borbwrap"><div class="borb" id="borb"><span class="bph" id="bph">Listo</span></div></div>
+      <div class="bcount" id="bcount">—</div>
+      <div class="bcoh" id="bcoh">Elige técnica e inicia</div>
+      <div class="seclabel" style="margin-top:18px">Técnica</div>
+      <div class="btech" id="btech"></div>
+      <button class="addbtn" id="bStart" onclick="toggleBreath()" style="background:linear-gradient(135deg,#4aa3ff,#5fcf8e);color:#fff">Iniciar sesión</button>
+    </section>
+
+    <!-- AUTOSUGESTIÓN -->
+    <section class="screen" data-screen="sugestion">
+      <button class="backbtn" onclick="go('mente')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Mente</button>
+      <div class="kicker">Método Coué · reprogramación</div>
+      <h1 class="big">Auto<em>sugestión</em>.</h1>
+      <div class="card" style="margin-top:14px"><div class="kicker" style="text-align:center">Fórmula activa</div><div class="formula" id="sugF">…</div><div class="belief"><span>Creencia</span><input type="range" id="sugB" min="1" max="10" value="7" oninput="setBelief(this.value)"><span><b id="sugBN" style="color:var(--gold)">7</b>/10</span></div></div>
+      <div class="repbtn" id="repBtn" onclick="tapRep()"><div><div class="rn" id="repN">0</div><div class="rl">toca para repetir · meta 100</div></div></div>
+      <div class="seclabel">Modo de práctica</div>
+      <div class="modes" id="sugModes"></div>
+      <div class="seclabel">Mis fórmulas <span class="tag" style="cursor:pointer" onclick="addFormula()">+ nueva</span></div>
+      <div id="sugList"></div>
+    </section>
+
+    <!-- PROGRESO -->
+    <section class="screen" data-screen="progreso">
+      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Sistema</button>
+      <div class="kicker">Lo que se mide, se domina</div>
+      <h1 class="big">Tu <em>progreso</em>.</h1>
+      <div class="pstat" id="pStats"></div>
+      <div class="seclabel">Logros</div>
+      <div class="ach" id="pAch"></div>
     </section>
   </div>
 
@@ -407,6 +466,7 @@ const defaults={
     {capa:'finanzas',min:120,t:isoAgo(1)},{capa:'aprendizaje',min:90,t:isoAgo(1)},{capa:'negocios',min:60,t:isoAgo(2)},{capa:'familia',min:60,t:isoAgo(3)},{capa:'finanzas',min:150,t:isoAgo(4)},{capa:'aprendizaje',min:60,t:isoAgo(5)}
   ],
   diario:[],
+  sugestion:{active:'Cada día, hablo con más calma y claridad',reps:0,belief:7,mode:'espejo',formulas:['Confío en mi capacidad de resolver lo que venga','Estoy en calma, estoy bien, estoy aquí']},
   war:['Dormir 7h','Ejercicio','Trading con plan','Empresa principal (Tequio)'],
   focus:{sessions:0,min:0,dur:25,track:0,vol:0.18,log:[]},
   people:[
@@ -423,10 +483,10 @@ const defaults={
   ]
 };
 let state=load();
-function load(){let m=JSON.parse(JSON.stringify(defaults));try{const s=JSON.parse(localStorage.getItem(KEY));if(s){for(const k in s)m[k]=s[k];m.profile=Object.assign({},defaults.profile,s.profile||{});m.focus=Object.assign({},defaults.focus,s.focus||{});m.finance=Object.assign({},defaults.finance,s.finance||{});m.ideal=Object.assign({},defaults.ideal,s.ideal||{});['layers','movimientos','timeLog','diario','war','people','trades'].forEach(k=>{if(!Array.isArray(m[k])||(!m[k].length&&defaults[k].length))m[k]=defaults[k]})}}catch(e){}m.trades.forEach(t=>{if(t.plan===undefined)t.plan=!(t.emo==='FOMO'||t.emo==='Revancha')});m.people.forEach(p=>{if(!Array.isArray(p.seeds))p.seeds=[]});return m}
+function load(){let m=JSON.parse(JSON.stringify(defaults));try{const s=JSON.parse(localStorage.getItem(KEY));if(s){for(const k in s)m[k]=s[k];m.profile=Object.assign({},defaults.profile,s.profile||{});m.focus=Object.assign({},defaults.focus,s.focus||{});m.finance=Object.assign({},defaults.finance,s.finance||{});m.ideal=Object.assign({},defaults.ideal,s.ideal||{});m.sugestion=Object.assign({},defaults.sugestion,s.sugestion||{});['layers','movimientos','timeLog','diario','war','people','trades'].forEach(k=>{if(!Array.isArray(m[k])||(!m[k].length&&defaults[k].length))m[k]=defaults[k]})}}catch(e){}m.trades.forEach(t=>{if(t.plan===undefined)t.plan=!(t.emo==='FOMO'||t.emo==='Revancha')});m.people.forEach(p=>{if(!Array.isArray(p.seeds))p.seeds=[]});return m}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2000)}
-function go(s){document.querySelectorAll('.screen').forEach(x=>x.classList.toggle('active',x.dataset.screen===s));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.nav===s));document.getElementById('view').scrollTop=0;if(s==='insights')renderInsights();if(s==='tiempo')renderTiempoScreen();if(s==='capital')renderCapital();if(s==='capas')drawRadar();if(s==='trading')renderReplay();if(s==='hipnosis')renderHypno();if(s!=='hipnosis')stopHypno()}
+function go(s){document.querySelectorAll('.screen').forEach(x=>x.classList.toggle('active',x.dataset.screen===s));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.nav===s));document.getElementById('view').scrollTop=0;if(s==='insights')renderInsights();if(s==='tiempo')renderTiempoScreen();if(s==='capital')renderCapital();if(s==='capas')drawRadar();if(s==='trading')renderReplay();if(s==='hipnosis')renderHypno();if(s!=='hipnosis')stopHypno();if(s==='respira')renderBreath();if(s!=='respira')stopBreath();if(s==='sugestion')renderSug();if(s==='progreso')renderProgreso()}
 const money=n=>'$'+Math.round(n).toLocaleString('en-US');
 const layerName=id=>{const l=state.layers.find(x=>x.id===id);return l?l.name:'—'};
 function finishOnboard(){state.profile.name=document.getElementById('obName').value.trim();const mi=document.getElementById('obMission').value.trim();if(mi)state.profile.mission=mi;state.profile.onboarded=true;save();document.getElementById('onboard').classList.remove('open');renderProfile();renderNorte()}
@@ -554,6 +614,22 @@ function hspeak(text){if(!hVoice||!('speechSynthesis'in window))return;try{const
 function toggleHypno(){if(hRunning){stopHypno();return}const s=hypno.find(h=>h.id===hSel);if(!s)return;hRunning=true;hIdx=0;const b=document.getElementById('hBtn');b.textContent='Detener';b.className='hstop';document.getElementById('orb').classList.add('breathe');document.getElementById('orbPh').textContent='Respira';startHypAudio(s);hnext(s)}
 function hnext(s){if(!hRunning)return;if(hIdx>=s.lines.length){document.getElementById('hScript').textContent='✦';document.getElementById('orbPh').textContent='Listo';hTimer=setTimeout(()=>{if(hRunning)stopHypno()},3500);return}const line=s.lines[hIdx++];const el=document.getElementById('hScript');el.style.opacity=0;setTimeout(()=>{el.textContent=line;el.style.opacity=1},300);hspeak(line);hTimer=setTimeout(()=>hnext(s),Math.max(4800,line.length*95))}
 function stopHypno(){if(!hRunning&&!hypNodes.length)return;hRunning=false;clearTimeout(hTimer);if('speechSynthesis'in window){try{speechSynthesis.cancel()}catch(e){}}stopHypAudio();const b=document.getElementById('hBtn');if(b){b.textContent='Empezar';b.className='hstart'}const o=document.getElementById('orb');if(o)o.classList.remove('breathe');const ph=document.getElementById('orbPh');if(ph)ph.textContent='Listo'}
+const BT={'478':{n:'4 · 7 · 8',d:'Inhala 4 · Retén 7 · Exhala 8',b:'CALMA',ph:['Inhala','Retén','Exhala'],t:[4,7,8]},'box':{n:'Caja Táctica',d:'4·4·4·4 (Navy SEALs)',b:'FOCO',ph:['Inhala','Retén','Exhala','Retén'],t:[4,4,4,4]},'coh':{n:'Coherencia',d:'5·5 · 5.5 resp/min',b:'HRV',ph:['Inhala','Exhala'],t:[5,5]},'wim':{n:'Wim Hof',d:'Activación 2·1',b:'ENERGÍA',ph:['Inhala','Exhala'],t:[2,1]}};
+let bSel='478',bOn=false,bTimer=null,bCi=null,bPi=0,bCyc=0;
+function renderBreath(){document.getElementById('btech').innerHTML=Object.keys(BT).map(k=>{const x=BT[k];return `<div class="btc ${k===bSel?'on':''}" onclick="pickBT('${k}')"><div class="bt">${x.n}</div><div class="bd">${x.d}</div><span class="bb">${x.b}</span></div>`}).join('')}
+function pickBT(k){if(bOn)return;bSel=k;renderBreath()}
+function toggleBreath(){if(bOn){stopBreath();return}bOn=true;bPi=0;bCyc=0;document.getElementById('bStart').textContent='Terminar';runBP()}
+function runBP(){if(!bOn)return;const t=BT[bSel],i=bPi%t.ph.length,ph=t.ph[i],dur=t.t[i],orb=document.getElementById('borb');document.getElementById('bph').textContent=ph;orb.style.transitionDuration=dur+'s';if(ph.indexOf('Inhala')>-1)orb.style.transform='scale(1.55)';else if(ph.indexOf('Retén')>-1){}else orb.style.transform='scale(.68)';let c=dur;document.getElementById('bcount').textContent=c;clearInterval(bCi);bCi=setInterval(()=>{c--;document.getElementById('bcount').textContent=Math.max(c,0);if(c<=0)clearInterval(bCi)},1000);const coh=Math.min(95,58+bCyc*7+Math.random()*6);document.getElementById('bcoh').textContent='Coherencia '+Math.round(coh)+'% · ciclo '+(bCyc+1);bTimer=setTimeout(()=>{bPi++;if(bPi%t.ph.length===0)bCyc++;runBP()},dur*1000)}
+function stopBreath(){if(!bOn)return;bOn=false;clearTimeout(bTimer);clearInterval(bCi);const o=document.getElementById('borb');if(o){o.style.transitionDuration='1.2s';o.style.transform='scale(1)'}const b=document.getElementById('bStart');if(b)b.textContent='Iniciar sesión';const ph=document.getElementById('bph');if(ph)ph.textContent='Listo';const bc=document.getElementById('bcount');if(bc)bc.textContent='—';const co=document.getElementById('bcoh');if(co)co.textContent='Sesión terminada'}
+const MODES=[['espejo','🪞','Espejo','Mirándote a los ojos'],['escritura','✍️','Escritura','Escribe 20 veces'],['susurro','🤫','Susurro','Repetición interna'],['antidoto','⚡','Antídoto','Ante pensamiento neg.']];
+function renderSug(){const s=state.sugestion;document.getElementById('sugF').textContent='"'+s.active+'"';document.getElementById('sugB').value=s.belief;document.getElementById('sugBN').textContent=s.belief;document.getElementById('repN').textContent=s.reps;document.getElementById('sugModes').innerHTML=MODES.map(m=>`<div class="modec ${s.mode===m[0]?'on':''}" onclick="setMode('${m[0]}')"><div class="mi2">${m[1]}</div><div class="mt2">${m[2]}</div><div class="md2">${m[3]}</div></div>`).join('');renderSugList()}
+function renderSugList(){const s=state.sugestion;document.getElementById('sugList').innerHTML=[s.active].concat(s.formulas).map((f,i)=>`<div class="fitem ${i===0?'on':''}" onclick="activateF(${i})"><div class="fnum">${i===0?'ACTIVA':'GUARDADA'}</div><div class="ftx">"${f}"</div></div>`).join('')}
+function tapRep(){state.sugestion.reps++;document.getElementById('repN').textContent=state.sugestion.reps;save();if(state.sugestion.reps%25===0)toast(state.sugestion.reps+' repeticiones ✦')}
+function setBelief(v){state.sugestion.belief=Number(v);document.getElementById('sugBN').textContent=v;save()}
+function setMode(m){state.sugestion.mode=m;save();renderSug()}
+function activateF(i){if(i===0)return;const s=state.sugestion;const arr=[s.active].concat(s.formulas);const chosen=arr[i];arr.splice(i,1);s.active=chosen;s.formulas=arr;s.reps=0;save();renderSug();toast('Fórmula activada')}
+function addFormula(){const f=prompt('Nueva fórmula (positiva, en presente, breve):');if(f&&f.trim()){state.sugestion.formulas.unshift(f.trim());save();renderSug();toast('Fórmula guardada')}}
+function renderProgreso(){const conPlan=state.trades.filter(t=>t.type==='tomado'&&t.plan).length;const ses=state.focus.sessions;const semillas=state.people.reduce((a,p)=>a+(p.seeds||[]).length,0);document.getElementById('pStats').innerHTML=`<div class="psc"><div class="pn" style="color:var(--gold)">${ses}</div><div class="pl">Sesiones</div></div><div class="psc"><div class="pn">${state.trades.length}</div><div class="pl">Trades</div></div><div class="psc"><div class="pn" style="color:var(--green)">${semillas}</div><div class="pl">Semillas</div></div>`;const ach=[['🎯','Disciplina de acero',conPlan,5,'5 trades con plan'],['📓','Cronista',state.diario.length,7,'7 entradas de diario'],['🧘','Enfoque profundo',ses,10,'10 sesiones de enfoque'],['🌱','Sembrador',semillas,5,'5 semillas de impacto'],['🧭','Visionario',state.layers.filter(l=>l.goals.y10).length,6,'meta a 10 años en 6 capas'],['💰','Primer millón',Math.round(state.finance.patrimonio/1e6*100),100,'llegar a $1M']];document.getElementById('pAch').innerHTML=ach.map(([i,t,v,g,d])=>{const pct=Math.min(100,v/g*100),win=v>=g;return `<div class="achc ${win?'win':''}"><div class="aci">${i}</div><div class="act">${t}</div><div class="acd">${win?'¡Logrado! ✦':d}</div><div class="acb"><div class="acf" style="width:${pct}%"></div></div></div>`}).join('')}
 function tick(){const d=new Date(),dias=['DOMINGO','LUNES','MARTES','MIÉRCOLES','JUEVES','VIERNES','SÁBADO'];const hh=d.getHours(),mm=String(d.getMinutes()).padStart(2,'0');document.getElementById('norteKicker').innerHTML=`${dias[d.getDay()]} · ${hh}:${mm} · <span class="live">EN VIVO</span>`;document.getElementById('sbTime').textContent=hh+':'+mm}
 function initRender(){renderProfile();renderNorte();drawRadar();renderLayers();renderTrading();renderGhosts();renderGente();renderTracks();renderFStat();renderDiario();renderCapital();document.querySelectorAll('.tpre button').forEach(b=>b.classList.toggle('on',Number(b.textContent)===state.focus.dur));document.getElementById('vol').value=Math.round(state.focus.vol*100);document.getElementById('volN').textContent=Math.round(state.focus.vol*100);selectTrack(state.focus.track);remaining=state.focus.dur*60;paintRing()}
 function init(){initRender();tick();setInterval(tick,15000);if(!state.profile.onboarded)document.getElementById('onboard').classList.add('open');else setTimeout(checkReminders,1200);if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{})}
