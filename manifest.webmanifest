@@ -1,0 +1,14 @@
+{
+  "name": "Brújula — Vida + Trading",
+  "short_name": "Brújula",
+  "description": "Tu brújula para navegar la vida y los mercados. Disciplina, enfoque y los 5 porqués de cada trade.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0c0e13",
+  "theme_color": "#0c0e13",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
