@@ -286,6 +286,14 @@
   .medtog .l{font-size:13px}
   .medtog button{background:#0f1218;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:7px 12px;font-size:12px;cursor:pointer;font-family:var(--sans)}
   .medtog button.on{background:var(--p1);color:#fff;border-color:var(--p1)}
+  /* ESTIRAMIENTOS */
+  .medring.salud circle.fg{stroke:var(--green)}
+  .stnow{font-family:var(--serif);font-size:22px;text-align:center;margin-top:16px;line-height:1.2}
+  .stnext{font-family:var(--mono);font-size:11px;color:var(--faint);text-align:center;margin-top:7px}
+  .stprog{height:5px;background:#0f1218;border-radius:3px;overflow:hidden;margin:14px 40px 0}
+  .stprogf{height:100%;background:var(--green);border-radius:3px;transition:width .4s}
+  .strow{display:flex;gap:8px;margin-top:8px}
+  .strow button{flex:1;background:var(--panel);border:1px solid var(--line);color:var(--muted);border-radius:11px;padding:13px;font-family:var(--sans);font-weight:600;font-size:13px;cursor:pointer}
   .tkdue{font-family:var(--mono);font-size:10px;color:var(--faint)}.tkx{margin-left:auto;background:none;border:0;color:var(--faint);cursor:pointer;font-size:13px}
 </style>
 </head>
@@ -371,6 +379,7 @@
         <div class="hubcard" onclick="go('workout')"><div class="hi">🏋️</div><div><div class="hn">Workout</div><div class="hd">Fuerza y progreso</div></div></div>
         <div class="hubcard" onclick="go('lectura')"><div class="hi">📖</div><div><div class="hn">Lectura</div><div class="hd">Biblioteca y rachas</div></div></div>
         <div class="hubcard" onclick="go('medita')"><div class="hi">🧘</div><div><div class="hn">Meditación</div><div class="hd">Timer y rachas</div></div></div>
+        <div class="hubcard" onclick="go('estira')"><div class="hi">🤸</div><div><div class="hn">Estiramientos</div><div class="hd">Rutinas guiadas</div></div></div>
       </div>
       <button class="warbtn" onclick="toggleWar()" style="margin-top:14px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.5 17.5 3 6V3h3l11.5 11.5"/><path d="m13 19 6-6"/><path d="m16 16 4 4"/><path d="m19 21 2-2"/></svg>Modo Guerra</button>
       <button class="notifbtn" onclick="openSettings()">⚙ Ajustes y respaldo</button>
@@ -580,6 +589,15 @@
       <div class="calseg wseg" id="mSeg"><button class="on" onclick="setMView('go',this)">Meditar</button><button onclick="setMView('prog',this)">Progreso</button></div>
       <div id="mBody"></div>
     </section>
+
+    <!-- ESTIRAMIENTOS -->
+    <section class="screen" data-screen="estira">
+      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Sistema</button>
+      <div class="kicker">Suelta la tensión</div>
+      <h1 class="big">Esti<em>ramientos</em>.</h1>
+      <div class="calseg wseg" id="sSeg"><button class="on" onclick="setSView('go',this)">Estirar</button><button onclick="setSView('prog',this)">Progreso</button></div>
+      <div id="sBody"></div>
+    </section>
   </div>
 
   <nav class="nav" id="nav">
@@ -777,6 +795,22 @@ const defaults={
       {id:'md5',type:'Concentración',min:20,t:isoAgo(0)}
     ]
   },
+  stretch:{
+    voice:true,
+    routines:[
+      {id:'sr1',zone:'Cuello',items:[{n:'Inclinación lateral derecha',s:30},{n:'Inclinación lateral izquierda',s:30},{n:'Barbilla al pecho',s:30},{n:'Rotación de hombros',s:30}]},
+      {id:'sr2',zone:'Espalda baja',items:[{n:'Gato–camello',s:40},{n:'Rodillas al pecho',s:40},{n:'Torsión espinal derecha',s:30},{n:'Torsión espinal izquierda',s:30},{n:'Postura del niño',s:45}]},
+      {id:'sr3',zone:'Caderas',items:[{n:'Mariposa',s:45},{n:'Zancada flexora derecha',s:40},{n:'Zancada flexora izquierda',s:40},{n:'Figura-4 derecha',s:40},{n:'Figura-4 izquierda',s:40}]},
+      {id:'sr4',zone:'Piernas',items:[{n:'Isquiotibiales de pie',s:40},{n:'Cuádriceps derecho',s:30},{n:'Cuádriceps izquierdo',s:30},{n:'Pantorrilla derecha',s:30},{n:'Pantorrilla izquierda',s:30}]},
+      {id:'sr5',zone:'Full body',items:[{n:'Estiramiento hacia arriba',s:30},{n:'Inclinación al frente',s:40},{n:'Zancada derecha',s:30},{n:'Zancada izquierda',s:30},{n:'Torsión de pie',s:30},{n:'Postura del niño',s:45}]}
+    ],
+    sessions:[
+      {id:'st1',name:'Espalda baja',min:3,t:isoAgo(4)},
+      {id:'st2',name:'Caderas',min:4,t:isoAgo(2)},
+      {id:'st3',name:'Cuello',min:2,t:isoAgo(1)},
+      {id:'st4',name:'Full body',min:3,t:isoAgo(0)}
+    ]
+  },
   impactLog:[],
   war:['Dormir 7h','Ejercicio','Trading con plan','Empresa principal (Tequio)'],
   focus:{sessions:0,min:0,dur:25,track:0,vol:0.18,log:[]},
@@ -794,10 +828,10 @@ const defaults={
   ]
 };
 let state=load();
-function load(){let m=JSON.parse(JSON.stringify(defaults));try{const s=JSON.parse(localStorage.getItem(KEY));if(s){for(const k in s)m[k]=s[k];m.profile=Object.assign({},defaults.profile,s.profile||{});m.focus=Object.assign({},defaults.focus,s.focus||{});m.finance=Object.assign({},defaults.finance,s.finance||{});m.ideal=Object.assign({},defaults.ideal,s.ideal||{});m.sugestion=Object.assign({},defaults.sugestion,s.sugestion||{});m.manifest=Object.assign({},defaults.manifest,s.manifest||{});['vibra','afir','vision'].forEach(k=>{if(!Array.isArray(m.manifest[k]))m.manifest[k]=[]});m.leyes=Object.assign({log:[]},defaults.leyes,s.leyes||{});if(!Array.isArray(m.leyes.log))m.leyes.log=[];['layers','movimientos','timeLog','diario','war','people','trades','events','todos'].forEach(k=>{if(!Array.isArray(m[k])||(!m[k].length&&defaults[k].length))m[k]=defaults[k]});if(!Array.isArray(m.impactLog))m.impactLog=[];m.workout=Object.assign({ex:[],routines:[],sessions:[],active:null},defaults.workout,s.workout||{});['ex','routines','sessions'].forEach(k=>{if(!Array.isArray(m.workout[k]))m.workout[k]=(defaults.workout[k]||[]).slice()});m.reading=Object.assign({books:[],logs:[]},defaults.reading,s.reading||{});['books','logs'].forEach(k=>{if(!Array.isArray(m.reading[k]))m.reading[k]=(defaults.reading[k]||[]).slice()});m.meditation=Object.assign({dur:10,bell:true,sessions:[]},defaults.meditation,s.meditation||{});if(!Array.isArray(m.meditation.sessions))m.meditation.sessions=(defaults.meditation.sessions||[]).slice()}}catch(e){}m.trades.forEach(t=>{if(t.plan===undefined)t.plan=!(t.emo==='FOMO'||t.emo==='Revancha')});m.people.forEach(p=>{if(!Array.isArray(p.seeds))p.seeds=[]});return m}
+function load(){let m=JSON.parse(JSON.stringify(defaults));try{const s=JSON.parse(localStorage.getItem(KEY));if(s){for(const k in s)m[k]=s[k];m.profile=Object.assign({},defaults.profile,s.profile||{});m.focus=Object.assign({},defaults.focus,s.focus||{});m.finance=Object.assign({},defaults.finance,s.finance||{});m.ideal=Object.assign({},defaults.ideal,s.ideal||{});m.sugestion=Object.assign({},defaults.sugestion,s.sugestion||{});m.manifest=Object.assign({},defaults.manifest,s.manifest||{});['vibra','afir','vision'].forEach(k=>{if(!Array.isArray(m.manifest[k]))m.manifest[k]=[]});m.leyes=Object.assign({log:[]},defaults.leyes,s.leyes||{});if(!Array.isArray(m.leyes.log))m.leyes.log=[];['layers','movimientos','timeLog','diario','war','people','trades','events','todos'].forEach(k=>{if(!Array.isArray(m[k])||(!m[k].length&&defaults[k].length))m[k]=defaults[k]});if(!Array.isArray(m.impactLog))m.impactLog=[];m.workout=Object.assign({ex:[],routines:[],sessions:[],active:null},defaults.workout,s.workout||{});['ex','routines','sessions'].forEach(k=>{if(!Array.isArray(m.workout[k]))m.workout[k]=(defaults.workout[k]||[]).slice()});m.reading=Object.assign({books:[],logs:[]},defaults.reading,s.reading||{});['books','logs'].forEach(k=>{if(!Array.isArray(m.reading[k]))m.reading[k]=(defaults.reading[k]||[]).slice()});m.meditation=Object.assign({dur:10,bell:true,sessions:[]},defaults.meditation,s.meditation||{});if(!Array.isArray(m.meditation.sessions))m.meditation.sessions=(defaults.meditation.sessions||[]).slice();m.stretch=Object.assign({voice:true,routines:[],sessions:[]},defaults.stretch,s.stretch||{});['routines','sessions'].forEach(k=>{if(!Array.isArray(m.stretch[k]))m.stretch[k]=(defaults.stretch[k]||[]).slice()})}}catch(e){}m.trades.forEach(t=>{if(t.plan===undefined)t.plan=!(t.emo==='FOMO'||t.emo==='Revancha')});m.people.forEach(p=>{if(!Array.isArray(p.seeds))p.seeds=[]});return m}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2000)}
-function go(s){document.querySelectorAll('.screen').forEach(x=>x.classList.toggle('active',x.dataset.screen===s));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.nav===s));document.getElementById('view').scrollTop=0;if(s==='insights')renderInsights();if(s==='tiempo')renderTiempoScreen();if(s==='capital')renderCapital();if(s==='capas')drawRadar();if(s==='trading')renderReplay();if(s==='hipnosis')renderHypno();if(s!=='hipnosis')stopHypno();if(s==='respira')renderBreath();if(s!=='respira')stopBreath();if(s==='sugestion')renderSug();if(s==='progreso')renderProgreso();if(s==='manifest')renderManifest();if(s==='leyes')renderLeyes();if(s==='calendario')renderCal();if(s==='tareas')renderTasks2();if(s==='workout')renderWorkout();if(s!=='workout'&&wTimer){clearInterval(wTimer);wTimer=null}if(s==='lectura')renderReading();if(s==='medita')renderMed();if(s!=='medita'&&medTimer){clearInterval(medTimer);medTimer=null;medRunning=false}if(s!=='sugestion')stopGuide()}
+function go(s){document.querySelectorAll('.screen').forEach(x=>x.classList.toggle('active',x.dataset.screen===s));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.nav===s));document.getElementById('view').scrollTop=0;if(s==='insights')renderInsights();if(s==='tiempo')renderTiempoScreen();if(s==='capital')renderCapital();if(s==='capas')drawRadar();if(s==='trading')renderReplay();if(s==='hipnosis')renderHypno();if(s!=='hipnosis')stopHypno();if(s==='respira')renderBreath();if(s!=='respira')stopBreath();if(s==='sugestion')renderSug();if(s==='progreso')renderProgreso();if(s==='manifest')renderManifest();if(s==='leyes')renderLeyes();if(s==='calendario')renderCal();if(s==='tareas')renderTasks2();if(s==='workout')renderWorkout();if(s!=='workout'&&wTimer){clearInterval(wTimer);wTimer=null}if(s==='lectura')renderReading();if(s==='medita')renderMed();if(s!=='medita'&&medTimer){clearInterval(medTimer);medTimer=null;medRunning=false}if(s==='estira')renderStretch();if(s!=='estira'&&stTimer){clearInterval(stTimer);stTimer=null;stRunning=false;try{speechSynthesis.cancel()}catch(e){}}if(s!=='sugestion')stopGuide()}
 const money=n=>'$'+Math.round(n).toLocaleString('en-US');
 const layerName=id=>{const l=state.layers.find(x=>x.id===id);return l?l.name:'—'};
 function finishOnboard(){state.profile.name=document.getElementById('obName').value.trim();const mi=document.getElementById('obMission').value.trim();if(mi)state.profile.mission=mi;state.profile.onboarded=true;save();document.getElementById('onboard').classList.remove('open');renderProfile();renderNorte()}
@@ -1142,6 +1176,40 @@ function renderMedProg(b){const sess=state.meditation.sessions;if(!sess.length){
   h+='<div class="seclabel" style="margin-top:24px">Sesiones recientes</div>'+sess.slice(0,10).map(s=>'<div class="wsess"><div class="l"><div class="nm">'+s.type+'</div><div class="mt">'+fmtDate(s.t)+'</div></div><div class="r">'+s.min+' min</div><button class="ex-del" onclick="delMedSession(\''+s.id+'\')">✕</button></div>').join('');
   b.innerHTML=h}
 function delMedSession(id){if(!confirm('¿Borrar esta sesión?'))return;state.meditation.sessions=state.meditation.sessions.filter(x=>x.id!==id);save();renderMedProg(document.getElementById('mBody'))}
+/* ===== ESTIRAMIENTOS ===== */
+let stView='go',stTimer=null,stRoutine=null,stIdx=0,stRemain=0,stRunning=false,stElapsed=0;
+function setSView(v,btn){stView=v;document.querySelectorAll('#sSeg button').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderStretch()}
+function renderStretch(){const b=document.getElementById('sBody');if(!b)return;if(stView==='go')renderStGo(b);else renderStProg(b)}
+function renderStGo(b){
+  if(!stRoutine){let h='<div class="seclabel">Elige una zona</div>';state.stretch.routines.forEach(r=>{const tot=r.items.reduce((a,x)=>a+x.s,0);h+='<div class="wrt" onclick="startStretch(\''+r.id+'\')"><div><div class="nm">'+r.zone+'</div><div class="ex">'+r.items.length+' estiramientos · '+Math.max(1,Math.round(tot/60))+' min</div></div><div class="go">▸</div></div>'});h+='<div class="medtog"><div class="l">Guía por voz</div><button class="'+(state.stretch.voice?'on':'')+'" onclick="toggleStVoice()">'+(state.stretch.voice?'Activada':'Desactivada')+'</button></div>';b.innerHTML=h;return}
+  const cur=stRoutine.items[stIdx],nxt=stRoutine.items[stIdx+1],C=2*Math.PI*88,frac=Math.max(0,Math.min(1,stRemain/cur.s));
+  let h='<div class="stnow">'+cur.n+'</div><div class="stnext">'+(nxt?'Siguiente: '+nxt.n:'Último estiramiento')+' · '+(stIdx+1)+'/'+stRoutine.items.length+'</div>';
+  h+='<div class="stprog"><div class="stprogf" style="width:'+(stIdx/stRoutine.items.length*100)+'%"></div></div>';
+  h+='<div class="medring salud"><svg viewBox="0 0 200 200"><circle class="bg" cx="100" cy="100" r="88"/><circle class="fg" id="stArc" cx="100" cy="100" r="88" style="stroke-dasharray:'+C+';stroke-dashoffset:'+(C*(1-frac))+'"/></svg><div class="medctr"><div class="t" id="stClock">'+medClock(stRemain)+'</div><div class="s">'+stRoutine.zone+'</div></div></div>';
+  h+='<button class="addbtn" onclick="toggleStretch()">'+(stRunning?'Pausar':'Reanudar')+'</button>';
+  h+='<div class="strow"><button onclick="skipStretch()">Saltar ▸</button><button onclick="finishStretch(false)">Terminar</button></div>';
+  b.innerHTML=h}
+function startStretch(rid){const r=state.stretch.routines.find(x=>x.id===rid);if(!r)return;stRoutine=r;stIdx=0;stRemain=r.items[0].s;stElapsed=0;stRunning=true;renderStGo(document.getElementById('sBody'));stBeep();stSpeak(r.items[0].n);if(stTimer)clearInterval(stTimer);stTimer=setInterval(stTick,1000)}
+function stTick(){if(!stRunning)return;stRemain--;stElapsed++;if(stRemain<=0){advanceStretch();return}paintStRing()}
+function paintStRing(){const arc=document.getElementById('stArc');if(!arc||!stRoutine)return;const cur=stRoutine.items[stIdx],C=2*Math.PI*88,frac=Math.max(0,Math.min(1,stRemain/cur.s));arc.style.strokeDashoffset=C*(1-frac);const cl=document.getElementById('stClock');if(cl)cl.textContent=medClock(stRemain)}
+function advanceStretch(){stIdx++;if(!stRoutine||stIdx>=stRoutine.items.length){finishStretch(true);return}stRemain=stRoutine.items[stIdx].s;stBeep();stSpeak(stRoutine.items[stIdx].n);renderStGo(document.getElementById('sBody'))}
+function skipStretch(){if(!stRoutine)return;stIdx++;if(stIdx>=stRoutine.items.length){finishStretch(true);return}stRemain=stRoutine.items[stIdx].s;stBeep();stSpeak(stRoutine.items[stIdx].n);renderStGo(document.getElementById('sBody'))}
+function toggleStretch(){if(!stRoutine)return;if(stRunning){stRunning=false;if(stTimer){clearInterval(stTimer);stTimer=null}try{speechSynthesis.cancel()}catch(e){}}else{stRunning=true;if(stTimer)clearInterval(stTimer);stTimer=setInterval(stTick,1000)}renderStGo(document.getElementById('sBody'))}
+function finishStretch(completed){if(stTimer){clearInterval(stTimer);stTimer=null}stRunning=false;try{speechSynthesis.cancel()}catch(e){}const zone=stRoutine?stRoutine.zone:'';if(stElapsed>=30){const mins=Math.max(1,Math.round(stElapsed/60));state.stretch.sessions.unshift({id:'st'+Date.now(),name:zone,min:mins,t:new Date().toISOString()});applyImpact('stretch','salud');state.events.unshift({id:'e'+Date.now(),kind:'stretch',title:'Estiramiento: '+zone,layer:'salud',at:new Date().toISOString(),dur:mins,done:true});save();drawRadar();if(completed)stSpeak('Terminaste. Buen trabajo.');toast(completed?'🤸 Rutina completa · +'+mins+' min':'🤸 Sesión guardada · '+mins+' min')}else toast('Sesión muy corta para registrar');stRoutine=null;stIdx=0;stRemain=0;stElapsed=0;renderStGo(document.getElementById('sBody'))}
+function stSpeak(t){if(!state.stretch.voice)return;try{if(!('speechSynthesis'in window))return;const u=new SpeechSynthesisUtterance(t);u.lang='es-MX';u.rate=.95;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
+function stBeep(){try{const Ctx=window.AudioContext||window.webkitAudioContext;if(!Ctx)return;const ac=new Ctx();const o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.value=660;o.connect(g);g.connect(ac.destination);const t=ac.currentTime;g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(0.25,t+0.01);g.gain.exponentialRampToValueAtTime(0.0001,t+0.45);o.start(t);o.stop(t+0.5);setTimeout(()=>{try{ac.close()}catch(e){}},800)}catch(e){}}
+function toggleStVoice(){state.stretch.voice=!state.stretch.voice;save();renderStGo(document.getElementById('sBody'))}
+function stStreak(){const days=new Set(state.stretch.sessions.map(x=>ymd(new Date(x.t))));let st=0,d=new Date();for(;;){if(days.has(ymd(d))){st++;d.setDate(d.getDate()-1)}else if(st===0&&ymd(d)===ymd(new Date())){d.setDate(d.getDate()-1)}else break}return st}
+function renderStProg(b){const sess=state.stretch.sessions;if(!sess.length){b.innerHTML='<p style="color:var(--faint);font-size:13px;text-align:center;padding:24px 0">Aún no estiras. Elige una zona en "Estirar".</p>';return}
+  const totalMin=sess.reduce((a,s)=>a+(+s.min||0),0),now=Date.now(),wkMin=sess.filter(s=>now-new Date(s.t)<7*DAY).reduce((a,s)=>a+(+s.min||0),0),streak=stStreak();
+  let h='<div class="wstats"><div class="wstat"><div class="v">'+sess.length+'</div><div class="k">Sesiones</div></div><div class="wstat"><div class="v">'+totalMin+'</div><div class="k">Minutos total</div></div><div class="wstat"><div class="v">'+streak+'</div><div class="k">Racha días</div></div></div>';
+  h+='<div class="seclabel" style="margin-top:22px">Minutos · 14 días <span class="tag">'+wkMin+' esta semana</span></div>';
+  const days=[];for(let i=13;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);days.push(d)}
+  const byDay=days.map(d=>sess.filter(s=>ymd(new Date(s.t))===ymd(d)).reduce((a,s)=>a+(+s.min||0),0)),mx=Math.max(...byDay,1);
+  h+='<div class="pgbars">'+days.map((d,i)=>'<div class="pgcol"><div class="pgbar" style="height:'+(byDay[i]/mx*80)+'px;background:var(--green);opacity:'+(byDay[i]?1:.25)+'"></div><div class="pgd">'+d.getDate()+'</div></div>').join('')+'</div>';
+  h+='<div class="seclabel" style="margin-top:24px">Sesiones recientes</div>'+sess.slice(0,10).map(s=>'<div class="wsess"><div class="l"><div class="nm">'+s.name+'</div><div class="mt">'+fmtDate(s.t)+'</div></div><div class="r">'+s.min+' min</div><button class="ex-del" onclick="delStSession(\''+s.id+'\')">✕</button></div>').join('');
+  b.innerHTML=h}
+function delStSession(id){if(!confirm('¿Borrar esta sesión?'))return;state.stretch.sessions=state.stretch.sessions.filter(x=>x.id!==id);save();renderStProg(document.getElementById('sBody'))}
 function tick(){const d=new Date(),dias=['DOMINGO','LUNES','MARTES','MIÉRCOLES','JUEVES','VIERNES','SÁBADO'];const hh=d.getHours(),mm=String(d.getMinutes()).padStart(2,'0');document.getElementById('norteKicker').innerHTML=`${dias[d.getDay()]} · ${hh}:${mm} · <span class="live">EN VIVO</span>`;document.getElementById('sbTime').textContent=hh+':'+mm}
 function initRender(){renderProfile();renderNorte();drawRadar();renderLayers();renderTrading();renderGhosts();renderGente();renderTracks();renderFStat();renderDiario();renderCapital();document.querySelectorAll('.tpre button').forEach(b=>b.classList.toggle('on',Number(b.textContent)===state.focus.dur));document.getElementById('vol').value=Math.round(state.focus.vol*100);document.getElementById('volN').textContent=Math.round(state.focus.vol*100);selectTrack(state.focus.track);remaining=state.focus.dur*60;paintRing()}
 function init(){initRender();tick();setInterval(tick,15000);if(!state.profile.onboarded)document.getElementById('onboard').classList.add('open');else setTimeout(checkReminders,1200);if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{})}
