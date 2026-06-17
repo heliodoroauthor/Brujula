@@ -273,6 +273,19 @@
   .pgcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px}
   .pgbar{width:100%;background:var(--amber);border-radius:4px 4px 0 0;min-height:2px}
   .pgd{font-family:var(--mono);font-size:8px;color:var(--faint)}
+  /* MEDITACIÓN */
+  .medring{position:relative;width:220px;height:220px;margin:22px auto 8px}
+  .medring svg{width:100%;height:100%;transform:rotate(-90deg)}
+  .medring circle{fill:none;stroke-width:8}
+  .medring circle.bg{stroke:rgba(255,255,255,.07)}
+  .medring circle.fg{stroke:var(--p1);stroke-linecap:round;transition:stroke-dashoffset .9s linear}
+  .medctr{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .medctr .t{font-family:var(--mono);font-size:42px;color:var(--ink);letter-spacing:.02em}
+  .medctr .s{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:6px}
+  .medtog{display:flex;justify-content:space-between;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:14px}
+  .medtog .l{font-size:13px}
+  .medtog button{background:#0f1218;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:7px 12px;font-size:12px;cursor:pointer;font-family:var(--sans)}
+  .medtog button.on{background:var(--p1);color:#fff;border-color:var(--p1)}
   .tkdue{font-family:var(--mono);font-size:10px;color:var(--faint)}.tkx{margin-left:auto;background:none;border:0;color:var(--faint);cursor:pointer;font-size:13px}
 </style>
 </head>
@@ -357,6 +370,7 @@
         <div class="hubcard" onclick="go('tareas')"><div class="hi">✅</div><div><div class="hn">Tareas</div><div class="hd">Lo que mueve la aguja</div></div></div>
         <div class="hubcard" onclick="go('workout')"><div class="hi">🏋️</div><div><div class="hn">Workout</div><div class="hd">Fuerza y progreso</div></div></div>
         <div class="hubcard" onclick="go('lectura')"><div class="hi">📖</div><div><div class="hn">Lectura</div><div class="hd">Biblioteca y rachas</div></div></div>
+        <div class="hubcard" onclick="go('medita')"><div class="hi">🧘</div><div><div class="hn">Meditación</div><div class="hd">Timer y rachas</div></div></div>
       </div>
       <button class="warbtn" onclick="toggleWar()" style="margin-top:14px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.5 17.5 3 6V3h3l11.5 11.5"/><path d="m13 19 6-6"/><path d="m16 16 4 4"/><path d="m19 21 2-2"/></svg>Modo Guerra</button>
       <button class="notifbtn" onclick="openSettings()">⚙ Ajustes y respaldo</button>
@@ -557,6 +571,15 @@
       <div class="calseg wseg" id="rSeg"><button class="on" onclick="setRView('leer',this)">Leer</button><button onclick="setRView('bib',this)">Biblioteca</button><button onclick="setRView('prog',this)">Progreso</button></div>
       <div id="rBody"></div>
     </section>
+
+    <!-- MEDITACIÓN -->
+    <section class="screen" data-screen="medita">
+      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Sistema</button>
+      <div class="kicker">Silencio que ordena</div>
+      <h1 class="big">Medi<em>tación</em>.</h1>
+      <div class="calseg wseg" id="mSeg"><button class="on" onclick="setMView('go',this)">Meditar</button><button onclick="setMView('prog',this)">Progreso</button></div>
+      <div id="mBody"></div>
+    </section>
   </div>
 
   <nav class="nav" id="nav">
@@ -744,6 +767,16 @@ const defaults={
       {id:'rl6',bookId:'b2',pages:20,min:22,quote:'El ahora es el único lugar donde la vida ocurre.',t:isoAgo(0)}
     ]
   },
+  meditation:{
+    dur:10,bell:true,
+    sessions:[
+      {id:'md1',type:'Mindfulness',min:10,t:isoAgo(5)},
+      {id:'md2',type:'Gratitud',min:10,t:isoAgo(3)},
+      {id:'md3',type:'Body scan',min:15,t:isoAgo(2)},
+      {id:'md4',type:'Mindfulness',min:10,t:isoAgo(1)},
+      {id:'md5',type:'Concentración',min:20,t:isoAgo(0)}
+    ]
+  },
   impactLog:[],
   war:['Dormir 7h','Ejercicio','Trading con plan','Empresa principal (Tequio)'],
   focus:{sessions:0,min:0,dur:25,track:0,vol:0.18,log:[]},
@@ -761,10 +794,10 @@ const defaults={
   ]
 };
 let state=load();
-function load(){let m=JSON.parse(JSON.stringify(defaults));try{const s=JSON.parse(localStorage.getItem(KEY));if(s){for(const k in s)m[k]=s[k];m.profile=Object.assign({},defaults.profile,s.profile||{});m.focus=Object.assign({},defaults.focus,s.focus||{});m.finance=Object.assign({},defaults.finance,s.finance||{});m.ideal=Object.assign({},defaults.ideal,s.ideal||{});m.sugestion=Object.assign({},defaults.sugestion,s.sugestion||{});m.manifest=Object.assign({},defaults.manifest,s.manifest||{});['vibra','afir','vision'].forEach(k=>{if(!Array.isArray(m.manifest[k]))m.manifest[k]=[]});m.leyes=Object.assign({log:[]},defaults.leyes,s.leyes||{});if(!Array.isArray(m.leyes.log))m.leyes.log=[];['layers','movimientos','timeLog','diario','war','people','trades','events','todos'].forEach(k=>{if(!Array.isArray(m[k])||(!m[k].length&&defaults[k].length))m[k]=defaults[k]});if(!Array.isArray(m.impactLog))m.impactLog=[];m.workout=Object.assign({ex:[],routines:[],sessions:[],active:null},defaults.workout,s.workout||{});['ex','routines','sessions'].forEach(k=>{if(!Array.isArray(m.workout[k]))m.workout[k]=(defaults.workout[k]||[]).slice()});m.reading=Object.assign({books:[],logs:[]},defaults.reading,s.reading||{});['books','logs'].forEach(k=>{if(!Array.isArray(m.reading[k]))m.reading[k]=(defaults.reading[k]||[]).slice()})}}catch(e){}m.trades.forEach(t=>{if(t.plan===undefined)t.plan=!(t.emo==='FOMO'||t.emo==='Revancha')});m.people.forEach(p=>{if(!Array.isArray(p.seeds))p.seeds=[]});return m}
+function load(){let m=JSON.parse(JSON.stringify(defaults));try{const s=JSON.parse(localStorage.getItem(KEY));if(s){for(const k in s)m[k]=s[k];m.profile=Object.assign({},defaults.profile,s.profile||{});m.focus=Object.assign({},defaults.focus,s.focus||{});m.finance=Object.assign({},defaults.finance,s.finance||{});m.ideal=Object.assign({},defaults.ideal,s.ideal||{});m.sugestion=Object.assign({},defaults.sugestion,s.sugestion||{});m.manifest=Object.assign({},defaults.manifest,s.manifest||{});['vibra','afir','vision'].forEach(k=>{if(!Array.isArray(m.manifest[k]))m.manifest[k]=[]});m.leyes=Object.assign({log:[]},defaults.leyes,s.leyes||{});if(!Array.isArray(m.leyes.log))m.leyes.log=[];['layers','movimientos','timeLog','diario','war','people','trades','events','todos'].forEach(k=>{if(!Array.isArray(m[k])||(!m[k].length&&defaults[k].length))m[k]=defaults[k]});if(!Array.isArray(m.impactLog))m.impactLog=[];m.workout=Object.assign({ex:[],routines:[],sessions:[],active:null},defaults.workout,s.workout||{});['ex','routines','sessions'].forEach(k=>{if(!Array.isArray(m.workout[k]))m.workout[k]=(defaults.workout[k]||[]).slice()});m.reading=Object.assign({books:[],logs:[]},defaults.reading,s.reading||{});['books','logs'].forEach(k=>{if(!Array.isArray(m.reading[k]))m.reading[k]=(defaults.reading[k]||[]).slice()});m.meditation=Object.assign({dur:10,bell:true,sessions:[]},defaults.meditation,s.meditation||{});if(!Array.isArray(m.meditation.sessions))m.meditation.sessions=(defaults.meditation.sessions||[]).slice()}}catch(e){}m.trades.forEach(t=>{if(t.plan===undefined)t.plan=!(t.emo==='FOMO'||t.emo==='Revancha')});m.people.forEach(p=>{if(!Array.isArray(p.seeds))p.seeds=[]});return m}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2000)}
-function go(s){document.querySelectorAll('.screen').forEach(x=>x.classList.toggle('active',x.dataset.screen===s));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.nav===s));document.getElementById('view').scrollTop=0;if(s==='insights')renderInsights();if(s==='tiempo')renderTiempoScreen();if(s==='capital')renderCapital();if(s==='capas')drawRadar();if(s==='trading')renderReplay();if(s==='hipnosis')renderHypno();if(s!=='hipnosis')stopHypno();if(s==='respira')renderBreath();if(s!=='respira')stopBreath();if(s==='sugestion')renderSug();if(s==='progreso')renderProgreso();if(s==='manifest')renderManifest();if(s==='leyes')renderLeyes();if(s==='calendario')renderCal();if(s==='tareas')renderTasks2();if(s==='workout')renderWorkout();if(s!=='workout'&&wTimer){clearInterval(wTimer);wTimer=null}if(s==='lectura')renderReading();if(s!=='sugestion')stopGuide()}
+function go(s){document.querySelectorAll('.screen').forEach(x=>x.classList.toggle('active',x.dataset.screen===s));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.nav===s));document.getElementById('view').scrollTop=0;if(s==='insights')renderInsights();if(s==='tiempo')renderTiempoScreen();if(s==='capital')renderCapital();if(s==='capas')drawRadar();if(s==='trading')renderReplay();if(s==='hipnosis')renderHypno();if(s!=='hipnosis')stopHypno();if(s==='respira')renderBreath();if(s!=='respira')stopBreath();if(s==='sugestion')renderSug();if(s==='progreso')renderProgreso();if(s==='manifest')renderManifest();if(s==='leyes')renderLeyes();if(s==='calendario')renderCal();if(s==='tareas')renderTasks2();if(s==='workout')renderWorkout();if(s!=='workout'&&wTimer){clearInterval(wTimer);wTimer=null}if(s==='lectura')renderReading();if(s==='medita')renderMed();if(s!=='medita'&&medTimer){clearInterval(medTimer);medTimer=null;medRunning=false}if(s!=='sugestion')stopGuide()}
 const money=n=>'$'+Math.round(n).toLocaleString('en-US');
 const layerName=id=>{const l=state.layers.find(x=>x.id===id);return l?l.name:'—'};
 function finishOnboard(){state.profile.name=document.getElementById('obName').value.trim();const mi=document.getElementById('obMission').value.trim();if(mi)state.profile.mission=mi;state.profile.onboarded=true;save();document.getElementById('onboard').classList.remove('open');renderProfile();renderNorte()}
@@ -1069,6 +1102,46 @@ function delBook(id){if(!confirm('¿Borrar este libro?'))return;state.reading.bo
 function openRead(bookId){const opts=state.reading.books.filter(b=>b.status!=='leido');if(!opts.length){toast('Añade un libro primero');go&&go('lectura');rView='bib';document.querySelectorAll('#rSeg button').forEach((x,i)=>x.classList.toggle('on',i===1));renderReading();return}const sel=document.getElementById('rdBook');sel.innerHTML=opts.map(b=>'<option value="'+b.id+'">'+b.title+'</option>').join('');if(bookId)sel.value=bookId;document.getElementById('rdPages').value='';document.getElementById('rdMin').value='';document.getElementById('rdQuote').value='';document.getElementById('modalRead').classList.add('open')}
 function closeRead(){document.getElementById('modalRead').classList.remove('open')}
 function saveRead(){const bk=bookById(document.getElementById('rdBook').value);if(!bk){toast('Elige un libro');return}const pages=Math.max(0,Number(document.getElementById('rdPages').value)||0);const min=Math.max(0,Number(document.getElementById('rdMin').value)||0);const quote=document.getElementById('rdQuote').value.trim();if(!pages&&!quote){toast('Registra páginas o una cita');return}state.reading.logs.push({id:'rl'+Date.now(),bookId:bk.id,pages,min,quote,t:new Date().toISOString()});let done=false;if(pages){bk.page=Math.min(bk.pages,bk.page+pages);if(bk.status==='pendiente')bk.status='leyendo';if(bk.page>=bk.pages){bk.status='leido';bk.page=bk.pages;done=true}}applyImpact('reading','aprendizaje');state.events.unshift({id:'e'+Date.now(),kind:'reading',title:'Lectura: '+bk.title,layer:'aprendizaje',at:new Date().toISOString(),dur:min||20,done:true});save();closeRead();drawRadar();renderReading();toast(done?'📖 ¡Terminaste '+bk.title+'!':'📖 +'+pages+' págs · Aprendizaje +0.2')}
+/* ===== MEDITACIÓN ===== */
+const MED_TYPES=['Mindfulness','Concentración','Visualización','Gratitud','Body scan'];
+let mView='go',medTimer=null,medRemain=0,medTotal=0,medRunning=false,medType='Mindfulness',medDur=(state.meditation&&state.meditation.dur)||10;
+function medClock(s){s=Math.max(0,Math.round(s));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+function medActive(){return medRunning||(medTotal>0&&medRemain>0&&medRemain<medTotal)}
+function medStreak(){const days=new Set(state.meditation.sessions.map(x=>ymd(new Date(x.t))));let st=0,d=new Date();for(;;){if(days.has(ymd(d))){st++;d.setDate(d.getDate()-1)}else if(st===0&&ymd(d)===ymd(new Date())){d.setDate(d.getDate()-1)}else break}return st}
+function setMView(v,btn){mView=v;document.querySelectorAll('#mSeg button').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderMed()}
+function renderMed(){const b=document.getElementById('mBody');if(!b)return;if(mView==='go')renderMedGo(b);else renderMedProg(b)}
+function renderMedGo(b){const durs=[5,10,15,20];const lock=medActive();
+  let h='<div class="wpick">'+MED_TYPES.map(t=>'<button class="'+(t===medType?'on':'')+'" onclick="pickMedType(\''+t+'\')"'+(lock?' disabled style="opacity:.5"':'')+'>'+t+'</button>').join('')+'</div>';
+  h+='<div class="wpick" style="margin-top:8px">'+durs.map(d=>'<button class="'+(d===medDur?'on':'')+'" onclick="pickMedDur('+d+')"'+(lock?' disabled style="opacity:.5"':'')+'>'+d+' min</button>').join('')+'</div>';
+  const total=medTotal||medDur*60,remain=medActive()?medRemain:total,C=2*Math.PI*88,frac=Math.max(0,Math.min(1,remain/total));
+  h+='<div class="medring"><svg viewBox="0 0 200 200"><circle class="bg" cx="100" cy="100" r="88"/><circle class="fg" id="medArc" cx="100" cy="100" r="88" style="stroke-dasharray:'+C+';stroke-dashoffset:'+(C*(1-frac))+'"/></svg><div class="medctr"><div class="t" id="medClock">'+medClock(remain)+'</div><div class="s" id="medState">'+medType+'</div></div></div>';
+  h+='<button class="addbtn" id="medBtn" onclick="toggleMed()">'+(medRunning?'Pausar':(medActive()?'Reanudar':'Comenzar'))+'</button>';
+  if(medActive())h+='<button class="cancel" onclick="stopMed()" style="margin-top:8px">Terminar ahora</button>';
+  h+='<div class="medtog"><div class="l">Campana al iniciar y terminar</div><button class="'+(state.meditation.bell?'on':'')+'" onclick="toggleBell()">'+(state.meditation.bell?'Activada':'Desactivada')+'</button></div>';
+  b.innerHTML=h}
+function pickMedType(t){if(medActive())return;medType=t;renderMedGo(document.getElementById('mBody'))}
+function pickMedDur(d){if(medActive())return;medDur=d;state.meditation.dur=d;save();renderMedGo(document.getElementById('mBody'))}
+function toggleBell(){state.meditation.bell=!state.meditation.bell;save();renderMedGo(document.getElementById('mBody'))}
+function paintMedRing(){const arc=document.getElementById('medArc');if(!arc)return;const C=2*Math.PI*88,total=medTotal||medDur*60,frac=Math.max(0,Math.min(1,medRemain/total));arc.style.strokeDashoffset=C*(1-frac);const cl=document.getElementById('medClock');if(cl)cl.textContent=medClock(medRemain)}
+function toggleMed(){if(medRunning){pauseMed();return}startMed()}
+function startMed(){const fresh=!medActive();if(fresh){medTotal=medDur*60;medRemain=medTotal}medRunning=true;if(fresh&&state.meditation.bell)playBell();if(medTimer)clearInterval(medTimer);medTimer=setInterval(medTick,1000);renderMedGo(document.getElementById('mBody'))}
+function pauseMed(){medRunning=false;if(medTimer){clearInterval(medTimer);medTimer=null}renderMedGo(document.getElementById('mBody'))}
+function medTick(){medRemain--;if(medRemain<=0){paintMedRing();finishMed(true);return}paintMedRing()}
+function stopMed(){finishMed(false)}
+function finishMed(completed){if(medTimer){clearInterval(medTimer);medTimer=null}medRunning=false;const elapsed=completed?medTotal:(medTotal-medRemain);if(elapsed>=30){const mins=Math.max(1,Math.round(elapsed/60));state.meditation.sessions.unshift({id:'md'+Date.now(),type:medType,min:mins,t:new Date().toISOString()});applyImpact('meditation','espiritu',mins>=15?1.5:1);state.events.unshift({id:'e'+Date.now(),kind:'meditation',title:'Meditación: '+medType,layer:'espiritu',at:new Date().toISOString(),dur:mins,done:true});save();drawRadar();if(state.meditation.bell)playBell();toast(completed?'🧘 Meditación completa · +'+mins+' min':'🧘 Sesión guardada · '+mins+' min')}else toast('Sesión muy corta para registrar');medRemain=0;medTotal=0;renderMedGo(document.getElementById('mBody'))}
+function playBell(){try{const Ctx=window.AudioContext||window.webkitAudioContext;if(!Ctx)return;const ac=new Ctx();const o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.value=528;o.connect(g);g.connect(ac.destination);const t=ac.currentTime;g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(0.45,t+0.02);g.gain.exponentialRampToValueAtTime(0.0001,t+2.6);o.start(t);o.stop(t+2.7);setTimeout(()=>{try{ac.close()}catch(e){}},3000)}catch(e){}}
+function renderMedProg(b){const sess=state.meditation.sessions;if(!sess.length){b.innerHTML='<p style="color:var(--faint);font-size:13px;text-align:center;padding:24px 0">Aún no meditas. Ve a "Meditar" y haz tu primera sesión.</p>';return}
+  const totalMin=sess.reduce((a,s)=>a+(+s.min||0),0),now=Date.now(),wkMin=sess.filter(s=>now-new Date(s.t)<7*DAY).reduce((a,s)=>a+(+s.min||0),0),streak=medStreak();
+  let h='<div class="wstats"><div class="wstat"><div class="v">'+sess.length+'</div><div class="k">Sesiones</div></div><div class="wstat"><div class="v">'+totalMin+'</div><div class="k">Minutos total</div></div><div class="wstat"><div class="v">'+streak+'</div><div class="k">Racha días</div></div></div>';
+  h+='<div class="seclabel" style="margin-top:22px">Minutos · 14 días <span class="tag">'+wkMin+' esta semana</span></div>';
+  const days=[];for(let i=13;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);days.push(d)}
+  const byDay=days.map(d=>sess.filter(s=>ymd(new Date(s.t))===ymd(d)).reduce((a,s)=>a+(+s.min||0),0)),mx=Math.max(...byDay,1);
+  h+='<div class="pgbars">'+days.map((d,i)=>'<div class="pgcol"><div class="pgbar" style="height:'+(byDay[i]/mx*80)+'px;background:var(--p1);opacity:'+(byDay[i]?1:.25)+'"></div><div class="pgd">'+d.getDate()+'</div></div>').join('')+'</div>';
+  const byType={};sess.forEach(s=>{byType[s.type]=(byType[s.type]||0)+(+s.min||0)});
+  h+='<div class="seclabel" style="margin-top:24px">Por tipo</div>'+Object.keys(byType).sort((a,c)=>byType[c]-byType[a]).map(t=>'<div class="wsess"><div class="l"><div class="nm">'+t+'</div></div><div class="r">'+byType[t]+' min</div></div>').join('');
+  h+='<div class="seclabel" style="margin-top:24px">Sesiones recientes</div>'+sess.slice(0,10).map(s=>'<div class="wsess"><div class="l"><div class="nm">'+s.type+'</div><div class="mt">'+fmtDate(s.t)+'</div></div><div class="r">'+s.min+' min</div><button class="ex-del" onclick="delMedSession(\''+s.id+'\')">✕</button></div>').join('');
+  b.innerHTML=h}
+function delMedSession(id){if(!confirm('¿Borrar esta sesión?'))return;state.meditation.sessions=state.meditation.sessions.filter(x=>x.id!==id);save();renderMedProg(document.getElementById('mBody'))}
 function tick(){const d=new Date(),dias=['DOMINGO','LUNES','MARTES','MIÉRCOLES','JUEVES','VIERNES','SÁBADO'];const hh=d.getHours(),mm=String(d.getMinutes()).padStart(2,'0');document.getElementById('norteKicker').innerHTML=`${dias[d.getDay()]} · ${hh}:${mm} · <span class="live">EN VIVO</span>`;document.getElementById('sbTime').textContent=hh+':'+mm}
 function initRender(){renderProfile();renderNorte();drawRadar();renderLayers();renderTrading();renderGhosts();renderGente();renderTracks();renderFStat();renderDiario();renderCapital();document.querySelectorAll('.tpre button').forEach(b=>b.classList.toggle('on',Number(b.textContent)===state.focus.dur));document.getElementById('vol').value=Math.round(state.focus.vol*100);document.getElementById('volN').textContent=Math.round(state.focus.vol*100);selectTrack(state.focus.track);remaining=state.focus.dur*60;paintRing()}
 function init(){initRender();tick();setInterval(tick,15000);if(!state.profile.onboarded)document.getElementById('onboard').classList.add('open');else setTimeout(checkReminders,1200);if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{})}
