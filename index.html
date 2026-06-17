@@ -201,7 +201,7 @@
 </head>
 <body>
 <div class="phone" id="phone">
-  <div class="statusbar"><span id="sbTime">6:42</span><span style="font-family:var(--serif);font-style:italic;letter-spacing:0;color:var(--gold)">Brújula</span><span class="right"><button class="gear" onclick="openSettings()" aria-label="Ajustes"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 0 1-4 0v-.1A1.6 1.6 0 0 0 7 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H1a2 2 0 0 1 0-4h.1A1.6 1.6 0 0 0 2.6 7a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H7a1.6 1.6 0 0 0 1-1.5V1a2 2 0 0 1 4 0v.1a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V7a1.6 1.6 0 0 0 1.5 1H23a2 2 0 0 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg></button><span class="dots"><b></b><b></b><b style="background:var(--gold)"></b></span></span></div>
+  <div class="statusbar"><span id="sbTime">6:42</span><span style="font-family:var(--serif);font-style:italic;letter-spacing:0;color:var(--gold)">Brújula</span><span class="right"><button class="gear" id="cloudBtn" onclick="cloudOpen()" aria-label="Cuenta" style="font-size:15px">☁</button><button class="gear" onclick="openSettings()" aria-label="Ajustes"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 0 1-4 0v-.1A1.6 1.6 0 0 0 7 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H1a2 2 0 0 1 0-4h.1A1.6 1.6 0 0 0 2.6 7a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H7a1.6 1.6 0 0 0 1-1.5V1a2 2 0 0 1 4 0v.1a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V7a1.6 1.6 0 0 0 1.5 1H23a2 2 0 0 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg></button><span class="dots"><b></b><b></b><b style="background:var(--gold)"></b></span></span></div>
   <div class="view" id="view">
 
     <!-- NORTE -->
@@ -499,6 +499,20 @@
     <button class="save" onclick="finishOnboard()">Entrar a Brújula</button>
   </div>
 
+  <div class="modal" id="modalCloud"><div class="sheet"><div class="grab"></div><h2>Tu cuenta · nube</h2><p class="hint">Inicia sesión una vez y tu Brújula se guarda y sincroniza entre dispositivos.</p>
+    <div id="clForm">
+      <div class="field"><label>Correo</label><input id="clEmail" type="email" placeholder="tu@correo.com"></div>
+      <div class="field"><label>Contraseña</label><input id="clPass" type="password" placeholder="mínimo 6 caracteres"></div>
+      <button class="save" onclick="cloudLogin()">Entrar</button>
+      <button class="cancel" onclick="cloudSignup()">Crear cuenta nueva</button>
+    </div>
+    <div id="clLogged" style="display:none">
+      <div class="setrow"><div><div class="l">Conectado</div><div class="d" id="clEmail2"></div></div><button onclick="cloudSyncNow()">Respaldar ahora</button></div>
+      <div class="setrow"><div><div class="l">Cerrar sesión</div><div class="d">Tus datos quedan en la nube</div></div><button class="danger" onclick="cloudLogout()">Salir</button></div>
+    </div>
+    <button class="cancel" onclick="cloudClose()">Cerrar</button>
+  </div></div>
+
   <div class="toast" id="toast"></div>
 </div>
 
@@ -742,6 +756,26 @@ function tick(){const d=new Date(),dias=['DOMINGO','LUNES','MARTES','MIÉRCOLES'
 function initRender(){renderProfile();renderNorte();drawRadar();renderLayers();renderTrading();renderGhosts();renderGente();renderTracks();renderFStat();renderDiario();renderCapital();document.querySelectorAll('.tpre button').forEach(b=>b.classList.toggle('on',Number(b.textContent)===state.focus.dur));document.getElementById('vol').value=Math.round(state.focus.vol*100);document.getElementById('volN').textContent=Math.round(state.focus.vol*100);selectTrack(state.focus.track);remaining=state.focus.dur*60;paintRing()}
 function init(){initRender();tick();setInterval(tick,15000);if(!state.profile.onboarded)document.getElementById('onboard').classList.add('open');else setTimeout(checkReminders,1200);if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{})}
 init();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+  if(!window.supabase){return;}
+  const sbc=window.supabase.createClient('https://szppsfgfqontkybeiqff.supabase.co','sb_publishable_kWaXi6w323ifrenwv2ZpMQ_Sd6zV7Xf');
+  let cloudOn=false,cpt=null;
+  const _origSave=window.save;
+  window.save=function(){_origSave();if(cloudOn){clearTimeout(cpt);cpt=setTimeout(cloudPush,1500);}};
+  function setDot(s){const b=document.getElementById('cloudBtn');if(b)b.style.color=s==='ok'?'var(--green)':s==='err'?'var(--red)':'var(--muted)';}
+  async function cloudPush(){try{const{data:{user}}=await sbc.auth.getUser();if(!user)return;state.updatedAt=new Date().toISOString();_origSave();await sbc.from('user_state').upsert({user_id:user.id,state});setDot('ok');}catch(e){setDot('err');}}
+  async function cloudMerge(){try{const{data:{user}}=await sbc.auth.getUser();if(!user)return;const{data}=await sbc.from('user_state').select('state,updated_at').eq('user_id',user.id).single();const lT=state.updatedAt?new Date(state.updatedAt).getTime():0;const rT=(data&&data.updated_at)?new Date(data.updated_at).getTime():0;if(data&&data.state&&Object.keys(data.state).length&&rT>lT){localStorage.setItem(KEY,JSON.stringify(data.state));state=load();initRender();toast('Sincronizado desde la nube');}cloudOn=true;await cloudPush();}catch(e){setDot('err');}}
+  window.cloudOpen=function(){const m=document.getElementById('modalCloud');sbc.auth.getUser().then(function(r){const user=r.data.user;document.getElementById('clLogged').style.display=user?'block':'none';document.getElementById('clForm').style.display=user?'none':'block';if(user)document.getElementById('clEmail2').textContent=user.email;});m.classList.add('open');};
+  window.cloudClose=function(){document.getElementById('modalCloud').classList.remove('open');};
+  window.cloudLogin=async function(){const e=document.getElementById('clEmail').value.trim(),p=document.getElementById('clPass').value;if(!e||!p){toast('Escribe correo y contraseña');return;}const{error}=await sbc.auth.signInWithPassword({email:e,password:p});if(error){toast(error.message);return;}toast('Sesión iniciada');await cloudMerge();window.cloudOpen();};
+  window.cloudSignup=async function(){const e=document.getElementById('clEmail').value.trim(),p=document.getElementById('clPass').value;if(!e||p.length<6){toast('Correo válido y contraseña de 6+');return;}const{data,error}=await sbc.auth.signUp({email:e,password:p});if(error){toast(error.message);return;}if(data.session){toast('Cuenta creada');await cloudMerge();window.cloudOpen();}else{toast('Revisa tu correo para confirmar la cuenta');}};
+  window.cloudLogout=async function(){await sbc.auth.signOut();cloudOn=false;setDot('off');toast('Sesión cerrada');window.cloudClose();};
+  window.cloudSyncNow=async function(){await cloudPush();toast('Respaldado en la nube ✦');};
+  sbc.auth.getSession().then(function(r){if(r.data.session&&r.data.session.user){cloudMerge();}});
+})();
 </script>
 </body>
 </html>
