@@ -197,6 +197,29 @@
   .law .ld{font-size:11.5px;color:var(--muted);margin-top:6px;line-height:1.4}.law .lctx{font-size:11px;color:var(--faint);margin-top:7px;font-style:italic}
   .law .lbtns{display:flex;gap:8px;margin-top:11px}.law .lbtns button{flex:1;border-radius:10px;padding:9px;font-family:var(--sans);font-weight:600;font-size:12px;cursor:pointer;border:1px solid var(--line);background:var(--panel2)}
   .law .lbtns .hon{color:var(--green);border-color:rgba(95,207,142,.3);background:rgba(95,207,142,.1)}.law .lbtns .vio{color:var(--red);border-color:rgba(240,115,107,.3);background:rgba(240,115,107,.1)}
+  .calseg{display:flex;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:4px;gap:4px;margin-top:14px}
+  .calseg button{flex:1;border:0;background:none;color:var(--muted);font-family:var(--sans);font-weight:600;font-size:13px;padding:9px;border-radius:9px;cursor:pointer}.calseg button.on{background:var(--gold);color:#191407}
+  .calnav{display:flex;align-items:center;justify-content:space-between;margin-top:12px}
+  .calnav button{background:var(--panel2);border:1px solid var(--line);color:var(--ink);border-radius:9px;width:36px;height:32px;cursor:pointer;font-size:16px}.calnav .lbl{font-family:var(--serif);font-size:18px}
+  .dtl{position:relative;margin-top:12px;border-top:1px solid var(--line)}
+  .dhr{position:relative;height:54px;border-bottom:1px solid rgba(255,255,255,.05)}.dhr .l{position:absolute;left:0;top:-7px;font-family:var(--mono);font-size:9.5px;color:var(--faint);width:42px}
+  .dlane{position:absolute;left:48px;right:0;top:0;bottom:0}
+  .dev{position:absolute;left:0;right:4px;border-radius:10px;padding:6px 9px;cursor:grab;user-select:none;touch-action:none;overflow:hidden;border:1px solid var(--line)}.dev.done{opacity:.5}
+  .dev .et{font-weight:600;font-size:12.5px;line-height:1.1}.dev .em{font-family:var(--mono);font-size:9px;opacity:.8;margin-top:2px}
+  .dev.k-workout{background:rgba(95,207,142,.16);border-color:rgba(95,207,142,.4)}.dev.k-meditation{background:rgba(123,92,255,.18);border-color:rgba(123,92,255,.4)}.dev.k-reading{background:rgba(224,160,77,.16);border-color:rgba(224,160,77,.4)}.dev.k-trade{background:rgba(201,169,97,.18);border-color:rgba(201,169,97,.45)}.dev.k-task{background:rgba(74,163,255,.16);border-color:rgba(74,163,255,.4)}.dev.k-stretch{background:rgba(95,207,142,.1);border-color:rgba(95,207,142,.3)}.dev.k-custom{background:var(--panel2)}
+  .wk{display:flex;gap:6px;align-items:flex-end;height:170px;margin-top:14px}
+  .wkcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;height:100%;justify-content:flex-end}
+  .wkbar{width:100%;border-radius:5px 5px 0 0;display:flex;flex-direction:column-reverse;overflow:hidden;min-height:2px}.wkseg{width:100%}
+  .wkd{font-family:var(--mono);font-size:9px;color:var(--faint)}.wkh{font-family:var(--mono);font-size:8px;color:var(--muted)}
+  .wklegend{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;justify-content:center}.wklegend span{font-size:9.5px;color:var(--muted);display:flex;align-items:center;gap:4px}.wklegend i{width:9px;height:9px;border-radius:2px;display:inline-block}
+  .mgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:14px}
+  .mdow{font-family:var(--mono);font-size:9px;color:var(--faint);text-align:center}
+  .mcell{aspect-ratio:1;border-radius:8px;border:1px solid var(--line);display:grid;place-items:center;font-family:var(--mono);font-size:11px;color:var(--muted);cursor:pointer;position:relative}.mcell.today{border-color:var(--gold);color:var(--gold)}.mcell .mdot{position:absolute;bottom:4px;width:5px;height:5px;border-radius:50%}
+  .tk{display:flex;gap:11px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}.tk:last-child{border:0}
+  .tkc{width:20px;height:20px;border-radius:6px;border:1.5px solid #39404d;flex:none;margin-top:1px;cursor:pointer;display:grid;place-items:center}.tkc.on{background:var(--gold);border-color:var(--gold)}.tkc svg{opacity:0}.tkc.on svg{opacity:1}
+  .tk.done .tt{color:var(--faint);text-decoration:line-through}.tk .tt{font-weight:600;font-size:14.5px}.tk .tmeta{display:flex;gap:7px;margin-top:5px;align-items:center;flex-wrap:wrap}
+  .prio{font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:5px}.prio.alta{color:var(--red);background:rgba(240,115,107,.13)}.prio.media{color:var(--amber);background:rgba(224,160,77,.13)}.prio.baja{color:var(--faint);background:#1a1e26}
+  .tkdue{font-family:var(--mono);font-size:10px;color:var(--faint)}.tkx{margin-left:auto;background:none;border:0;color:var(--faint);cursor:pointer;font-size:13px}
 </style>
 </head>
 <body>
@@ -276,6 +299,8 @@
         <div class="hubcard" onclick="go('progreso')"><div class="hi">📊</div><div><div class="hn">Progreso</div><div class="hd">Rachas y logros</div></div></div>
         <div class="hubcard" onclick="go('manifest')"><div class="hi">🔮</div><div><div class="hn">Manifestación</div><div class="hd">Atrae tu realidad</div></div></div>
         <div class="hubcard" onclick="go('leyes')"><div class="hi">🌌</div><div><div class="hn">Leyes Cósmicas</div><div class="hd">Vive en alineación</div></div></div>
+        <div class="hubcard" onclick="go('calendario')"><div class="hi">📅</div><div><div class="hn">Calendario</div><div class="hd">Día · Semana · Mes</div></div></div>
+        <div class="hubcard" onclick="go('tareas')"><div class="hi">✅</div><div><div class="hn">Tareas</div><div class="hd">Lo que mueve la aguja</div></div></div>
       </div>
       <button class="warbtn" onclick="toggleWar()" style="margin-top:14px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.5 17.5 3 6V3h3l11.5 11.5"/><path d="m13 19 6-6"/><path d="m16 16 4 4"/><path d="m19 21 2-2"/></svg>Modo Guerra</button>
       <button class="notifbtn" onclick="openSettings()">⚙ Ajustes y respaldo</button>
@@ -317,7 +342,7 @@
       <div class="kicker">Tu copiloto · basado en tus datos</div>
       <h1 class="big">¿Estás <em>alineado</em>?</h1>
       <div id="insList" style="margin-top:14px"></div>
-      <p class="kicker" style="margin-top:16px;line-height:1.6">El sparring que te reta y cruza tus trades con tus fantasmas llega con el backend. Esto ya razona sobre tus datos.</p>
+      <p class="kicker" style="margin-top:16px;line-height:1.6">Análisis calculado directo de tus datos: tiempo, capas, disciplina y finanzas. Sin IA — pura matemática sobre lo que registras.</p>
     </section>
 
     <!-- ENFOQUE -->
@@ -438,6 +463,26 @@
       <div class="seclabel">Las 9 leyes <span class="tag">aplica hoy</span></div>
       <div id="lawList"></div>
     </section>
+
+    <!-- CALENDARIO -->
+    <section class="screen" data-screen="calendario">
+      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Sistema</button>
+      <div class="kicker">Tu tiempo, una sola vista</div>
+      <h1 class="big">Calen<em>dario</em>.</h1>
+      <div class="calseg"><button class="on" onclick="setCalView('dia',this)">Día</button><button onclick="setCalView('sem',this)">Semana</button><button onclick="setCalView('mes',this)">Mes</button></div>
+      <div class="calnav"><button onclick="calNav(-1)">‹</button><span class="lbl" id="calLbl"></span><button onclick="calNav(1)">›</button></div>
+      <div id="calBody"></div>
+      <button class="addbtn" onclick="openEvent()" style="margin-top:14px">+ Evento</button>
+    </section>
+
+    <!-- TAREAS -->
+    <section class="screen" data-screen="tareas">
+      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Sistema</button>
+      <div class="kicker">Lo que mueve la aguja</div>
+      <h1 class="big">Tus <em>tareas</em>.</h1>
+      <button class="addbtn" onclick="openTask()" style="margin-top:14px">+ Tarea</button>
+      <div id="taskList2"></div>
+    </section>
   </div>
 
   <nav class="nav" id="nav">
@@ -513,6 +558,21 @@
     <button class="cancel" onclick="cloudClose()">Cerrar</button>
   </div></div>
 
+  <div class="modal" id="modalEvent"><div class="sheet"><div class="grab"></div><h2>Nuevo evento</h2><p class="hint">Agéndalo y, al completarlo, sube tu capa.</p>
+    <div class="field"><label>Tipo</label><select id="evKind" onchange="evKindCh()"><option value="workout">Workout</option><option value="stretch">Estiramiento</option><option value="meditation">Meditación</option><option value="reading">Lectura</option><option value="task">Tarea</option><option value="trade">Trading</option><option value="custom">Otro</option></select></div>
+    <div class="field"><label>Título</label><input id="evTitle" placeholder="BJJ, Leer 20 págs…"></div>
+    <div class="field"><label>Capa</label><select id="evLayer"></select></div>
+    <div class="two"><div class="field"><label>Hora</label><input id="evTime" type="time" value="08:00"></div><div class="field"><label>Duración (min)</label><input id="evDur" type="number" value="60"></div></div>
+    <button class="save" onclick="saveEvent()">Agendar</button><button class="cancel" onclick="closeEvent()">Cancelar</button>
+  </div></div>
+
+  <div class="modal" id="modalTask"><div class="sheet"><div class="grab"></div><h2>Nueva tarea</h2><p class="hint">Vincúlala a una capa; al completarla sube esa capa.</p>
+    <div class="field"><label>Tarea</label><input id="tkTitle" placeholder="¿Qué hay que hacer?"></div>
+    <div class="two"><div class="field"><label>Capa</label><select id="tkLayer"></select></div><div class="field"><label>Prioridad</label><select id="tkPrio"><option value="alta">Alta</option><option value="media" selected>Media</option><option value="baja">Baja</option></select></div></div>
+    <div class="field"><label>Fecha límite (opcional)</label><input id="tkDue" type="date"></div>
+    <button class="save" onclick="saveTask2()">Agregar</button><button class="cancel" onclick="closeTask2()">Cancelar</button>
+  </div></div>
+
   <div class="toast" id="toast"></div>
 </div>
 
@@ -520,6 +580,7 @@
 const KEY='brujula_v2', DAY=86400000;
 function isoAgo(d){return new Date(Date.now()-d*DAY).toISOString()}
 function mmddIn(d){const x=new Date(Date.now()+d*DAY);return String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0')}
+function dAt(h,m){const d=new Date();d.setHours(h,m,0,0);return d.toISOString()}
 const LG={y50:'50 años',y20:'20 años',y10:'10 años',y5:'5 años',anual:'Este año'};
 const defaults={
   profile:{name:'',mission:'Construir empresas que fortalezcan México y alcanzar libertad financiera mediante trading y tecnología.',onboarded:false,notif:false,warMode:false},
@@ -547,6 +608,17 @@ const defaults={
   sugestion:{active:'Cada día, hablo con más calma y claridad',reps:0,belief:7,mode:'espejo',formulas:['Confío en mi capacidad de resolver lo que venga','Estoy en calma, estoy bien, estoy aquí']},
   manifest:{vibra:[{t:isoAgo(1),val:7},{t:isoAgo(2),val:6},{t:isoAgo(3),val:8},{t:isoAgo(4),val:7}],afir:[{t:isoAgo(1),text:'Soy un trader disciplinado, paciente y rentable.'}],vision:[]},
   leyes:{log:[{lawId:'ritmo',type:'violé',context:'Operé fuera de mi horario',t:isoAgo(1)},{lawId:'siembra',type:'honré',context:'Journaling de 3 trades',t:isoAgo(1)},{lawId:'causa',type:'honré',context:'Respeté mi stop',t:isoAgo(2)}]},
+  events:[
+    {id:'e1',kind:'workout',title:'BJJ',layer:'salud',at:dAt(7,0),dur:60,done:true},
+    {id:'e2',kind:'trade',title:'Sesión NY',layer:'finanzas',at:dAt(8,30),dur:120,done:false},
+    {id:'e3',kind:'reading',title:'Leer 20 págs',layer:'aprendizaje',at:dAt(13,0),dur:30,done:false},
+    {id:'e4',kind:'meditation',title:'Meditar 15 min',layer:'espiritu',at:dAt(21,0),dur:15,done:false}
+  ],
+  todos:[
+    {id:'k1',title:'Cerrar el módulo de login',layer:'negocios',priority:'alta',due:'',done:false,subs:[]},
+    {id:'k2',title:'Llamar a papá',layer:'familia',priority:'media',due:'',done:false,subs:[]}
+  ],
+  impactLog:[],
   war:['Dormir 7h','Ejercicio','Trading con plan','Empresa principal (Tequio)'],
   focus:{sessions:0,min:0,dur:25,track:0,vol:0.18,log:[]},
   people:[
@@ -563,10 +635,10 @@ const defaults={
   ]
 };
 let state=load();
-function load(){let m=JSON.parse(JSON.stringify(defaults));try{const s=JSON.parse(localStorage.getItem(KEY));if(s){for(const k in s)m[k]=s[k];m.profile=Object.assign({},defaults.profile,s.profile||{});m.focus=Object.assign({},defaults.focus,s.focus||{});m.finance=Object.assign({},defaults.finance,s.finance||{});m.ideal=Object.assign({},defaults.ideal,s.ideal||{});m.sugestion=Object.assign({},defaults.sugestion,s.sugestion||{});m.manifest=Object.assign({},defaults.manifest,s.manifest||{});['vibra','afir','vision'].forEach(k=>{if(!Array.isArray(m.manifest[k]))m.manifest[k]=[]});m.leyes=Object.assign({log:[]},defaults.leyes,s.leyes||{});if(!Array.isArray(m.leyes.log))m.leyes.log=[];['layers','movimientos','timeLog','diario','war','people','trades'].forEach(k=>{if(!Array.isArray(m[k])||(!m[k].length&&defaults[k].length))m[k]=defaults[k]})}}catch(e){}m.trades.forEach(t=>{if(t.plan===undefined)t.plan=!(t.emo==='FOMO'||t.emo==='Revancha')});m.people.forEach(p=>{if(!Array.isArray(p.seeds))p.seeds=[]});return m}
+function load(){let m=JSON.parse(JSON.stringify(defaults));try{const s=JSON.parse(localStorage.getItem(KEY));if(s){for(const k in s)m[k]=s[k];m.profile=Object.assign({},defaults.profile,s.profile||{});m.focus=Object.assign({},defaults.focus,s.focus||{});m.finance=Object.assign({},defaults.finance,s.finance||{});m.ideal=Object.assign({},defaults.ideal,s.ideal||{});m.sugestion=Object.assign({},defaults.sugestion,s.sugestion||{});m.manifest=Object.assign({},defaults.manifest,s.manifest||{});['vibra','afir','vision'].forEach(k=>{if(!Array.isArray(m.manifest[k]))m.manifest[k]=[]});m.leyes=Object.assign({log:[]},defaults.leyes,s.leyes||{});if(!Array.isArray(m.leyes.log))m.leyes.log=[];['layers','movimientos','timeLog','diario','war','people','trades','events','todos'].forEach(k=>{if(!Array.isArray(m[k])||(!m[k].length&&defaults[k].length))m[k]=defaults[k]});if(!Array.isArray(m.impactLog))m.impactLog=[]}}catch(e){}m.trades.forEach(t=>{if(t.plan===undefined)t.plan=!(t.emo==='FOMO'||t.emo==='Revancha')});m.people.forEach(p=>{if(!Array.isArray(p.seeds))p.seeds=[]});return m}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2000)}
-function go(s){document.querySelectorAll('.screen').forEach(x=>x.classList.toggle('active',x.dataset.screen===s));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.nav===s));document.getElementById('view').scrollTop=0;if(s==='insights')renderInsights();if(s==='tiempo')renderTiempoScreen();if(s==='capital')renderCapital();if(s==='capas')drawRadar();if(s==='trading')renderReplay();if(s==='hipnosis')renderHypno();if(s!=='hipnosis')stopHypno();if(s==='respira')renderBreath();if(s!=='respira')stopBreath();if(s==='sugestion')renderSug();if(s==='progreso')renderProgreso();if(s==='manifest')renderManifest();if(s==='leyes')renderLeyes();if(s!=='sugestion')stopGuide()}
+function go(s){document.querySelectorAll('.screen').forEach(x=>x.classList.toggle('active',x.dataset.screen===s));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.nav===s));document.getElementById('view').scrollTop=0;if(s==='insights')renderInsights();if(s==='tiempo')renderTiempoScreen();if(s==='capital')renderCapital();if(s==='capas')drawRadar();if(s==='trading')renderReplay();if(s==='hipnosis')renderHypno();if(s!=='hipnosis')stopHypno();if(s==='respira')renderBreath();if(s!=='respira')stopBreath();if(s==='sugestion')renderSug();if(s==='progreso')renderProgreso();if(s==='manifest')renderManifest();if(s==='leyes')renderLeyes();if(s==='calendario')renderCal();if(s==='tareas')renderTasks2();if(s!=='sugestion')stopGuide()}
 const money=n=>'$'+Math.round(n).toLocaleString('en-US');
 const layerName=id=>{const l=state.layers.find(x=>x.id===id);return l?l.name:'—'};
 function finishOnboard(){state.profile.name=document.getElementById('obName').value.trim();const mi=document.getElementById('obMission').value.trim();if(mi)state.profile.mission=mi;state.profile.onboarded=true;save();document.getElementById('onboard').classList.remove('open');renderProfile();renderNorte()}
@@ -752,6 +824,35 @@ function drawMandala(){const cx=160,cy=140,r1=58,r2=112,n=LAWS.length,gap=0.035,
 function refreshWisdom(){const li=Math.floor(Math.random()*LAWS.length),l=LAWS[li],wi=Math.floor(Math.random()*l.w.length);document.getElementById('wisQ').textContent='"'+l.w[wi]+'"';document.getElementById('wisL').textContent='Ley de '+l.n}
 function renderLeyes(){drawMandala();refreshWisdom();const sc=cosmicScore();document.getElementById('cosNum').textContent=sc==null?'—':sc.toFixed(1);const stats=LAWS.map(l=>({l,s:lawStats(l.id)}));document.getElementById('topHon').textContent=stats.filter(x=>x.s.h>0).sort((a,b)=>b.s.h-a.s.h).slice(0,3).map(x=>x.l.n).join(', ')||'—';document.getElementById('topVio').textContent=stats.filter(x=>x.s.v>0).sort((a,b)=>b.s.v-a.s.v).slice(0,3).map(x=>x.l.n).join(', ')||'—';document.getElementById('lawList').innerHTML=LAWS.map(l=>{const s=lawStats(l.id),alTxt=s.al==null?'—':Math.round(s.al*100)+'%',alCol=s.al==null?'var(--faint)':s.al>=0.6?'var(--green)':s.al<0.4?'var(--red)':'var(--gold)',ctx=s.last?('Último: '+(s.last.type==='honré'?'✓ ':'✗ ')+(s.last.context||s.last.type)):'';return '<div class="law"><div class="lh"><span class="li">'+l.ic+'</span><span class="ln">'+l.n+'</span><span class="lal" style="color:'+alCol+'">'+alTxt+'</span></div><div class="ld">'+l.desc+'</div>'+(ctx?'<div class="lctx">'+ctx+'</div>':'')+'<div class="lbtns"><button class="hon" onclick="logLey(\''+l.id+'\',\'honré\')">Honré ('+s.h+')</button><button class="vio" onclick="logLey(\''+l.id+'\',\'violé\')">Violé ('+s.v+')</button></div></div>'}).join('')}
 function logLey(id,type){const law=LAWS.find(l=>l.id===id),ctx=prompt((type==='honré'?'¿Cómo honraste':'¿Cómo violaste')+' la Ley de '+law.n+'?','');if(ctx===null)return;state.leyes.log.unshift({lawId:id,type,context:ctx.trim(),t:new Date().toISOString()});if(state.leyes.log.length>300)state.leyes.log.pop();save();renderLeyes();toast(type==='honré'?'Honrada ✓':'Registrada ✗')}
+const CIMPACT={workout:{layer:'salud',d:0.3},stretch:{layer:'salud',d:0.1},meditation:{layer:'espiritu',d:0.2},reading:{layer:'aprendizaje',d:0.2},task:{layer:null,d:0.1},trade:{layer:'finanzas',d:0.1},custom:{layer:null,d:0.1}};
+function applyImpact(kind,layer,mult){const r=CIMPACT[kind]||{};const lid=layer||r.layer;if(!lid)return;const L=state.layers.find(x=>x.id===lid);if(!L)return;L.score=Math.max(0,Math.min(10,+(L.score+(r.d||0.1)*(mult||1)).toFixed(2)));if(!Array.isArray(state.impactLog))state.impactLog=[];state.impactLog.push({t:new Date().toISOString(),layer:lid,d:+((r.d||0.1)*(mult||1)).toFixed(2),reason:kind})}
+let calView='dia',calDate=new Date();
+function ymd(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function evMin(at){const d=new Date(at);return d.getHours()*60+d.getMinutes()}
+function fmtMin(m){m=((Math.round(m)%1440)+1440)%1440;return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0')}
+function weekStart(d){const x=new Date(d);const day=(x.getDay()+6)%7;x.setDate(x.getDate()-day);x.setHours(0,0,0,0);return x}
+function setCalView(v,btn){calView=v;document.querySelectorAll('.calseg button').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderCal()}
+function calNav(dir){if(calView==='dia')calDate.setDate(calDate.getDate()+dir);else if(calView==='sem')calDate.setDate(calDate.getDate()+7*dir);else calDate.setMonth(calDate.getMonth()+dir);renderCal()}
+function calLabel(){const mN=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];if(calView==='mes')return ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'][calDate.getMonth()]+' '+calDate.getFullYear();if(calView==='sem'){const m=weekStart(calDate),e=new Date(m);e.setDate(e.getDate()+6);return m.getDate()+' '+mN[m.getMonth()]+' – '+e.getDate()+' '+mN[e.getMonth()]}const dN=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];return dN[calDate.getDay()]+' '+calDate.getDate()+' '+mN[calDate.getMonth()]}
+function renderCal(){document.getElementById('calLbl').textContent=calLabel();const b=document.getElementById('calBody');if(calView==='dia')renderDia(b);else if(calView==='sem')renderSem(b);else renderMes(b)}
+function renderDia(b){const S=5,E=23,HH=54,day=ymd(calDate);const evs=state.events.filter(e=>ymd(new Date(e.at))===day);let h='<div class="dtl">';for(let hr=S;hr<E;hr++)h+='<div class="dhr"><span class="l">'+String(hr).padStart(2,'0')+':00</span></div>';h+='<div class="dlane" id="dlane"></div></div>';b.innerHTML=h;const lane=document.getElementById('dlane');evs.forEach(e=>{const min=evMin(e.at),top=Math.max(0,(min-S*60)/60*HH);const d=document.createElement('div');d.className='dev k-'+e.kind+(e.done?' done':'');d.style.top=top+'px';d.style.height=Math.max(24,e.dur/60*HH-4)+'px';d.innerHTML='<div class="et">'+e.title+'</div><div class="em">'+fmtMin(min)+'–'+fmtMin(min+e.dur)+(e.done?' ✓':'')+'</div>';calDrag(d,e,S,HH);lane.appendChild(d)});if(!evs.length)b.insertAdjacentHTML('beforeend','<p style="color:var(--faint);font-size:12px;text-align:center;padding:12px 0">Sin eventos este día. Toca "+ Evento".</p>')}
+function calDrag(el,e,S,HH){let sy=0,st=0,moved=false,drag=false;el.addEventListener('pointerdown',ev=>{drag=true;moved=false;sy=ev.clientY;st=parseFloat(el.style.top);el.setPointerCapture(ev.pointerId);el.style.zIndex=10});el.addEventListener('pointermove',ev=>{if(!drag)return;const dy=ev.clientY-sy;if(Math.abs(dy)>4)moved=true;const top=Math.max(0,st+dy);el.style.top=top+'px';const min=S*60+Math.round(top/HH*60);el.querySelector('.em').textContent=fmtMin(min)+'–'+fmtMin(min+e.dur)});el.addEventListener('pointerup',ev=>{if(!drag)return;drag=false;el.style.zIndex='';if(!moved){toggleEventDone(e.id);return}let min=S*60+Math.round(parseFloat(el.style.top)/HH*60);min=Math.round(min/15)*15;const d=new Date(e.at);d.setHours(Math.floor(min/60),min%60,0,0);e.at=d.toISOString();save();renderDia(document.getElementById('calBody'))})}
+function toggleEventDone(id){const e=state.events.find(x=>x.id===id);if(!e)return;e.done=!e.done;if(e.done)applyImpact(e.kind,e.layer,e.kind==='meditation'&&e.dur>=15?1.5:1);save();renderCal();drawRadar();toast(e.done?'✓ '+e.title:'Reabierto')}
+function renderSem(b){const ws=weekStart(calDate),dd=['L','M','X','J','V','S','D'];const days=[...Array(7)].map((_,i)=>{const d=new Date(ws);d.setDate(d.getDate()+i);return d});const data=days.map(d=>{const k=ymd(d),evs=state.events.filter(e=>ymd(new Date(e.at))===k);const byC={};evs.forEach(e=>{const c=e.layer||'custom';byC[c]=(byC[c]||0)+(e.dur||0)});return{byC,tot:Object.values(byC).reduce((a,x)=>a+x,0)}});const max=Math.max(...data.map(x=>x.tot),60);let h='<div class="wk">';data.forEach((x,i)=>{let segs='';Object.keys(x.byC).forEach(c=>{segs+='<div class="wkseg" style="height:'+(x.byC[c]/max*150)+'px;background:'+(capColor[c]||'var(--gold)')+'"></div>'});h+='<div class="wkcol"><div class="wkh">'+(x.tot?Math.round(x.tot/60*10)/10+'h':'')+'</div><div class="wkbar">'+segs+'</div><div class="wkd">'+dd[i]+'</div></div>'});h+='</div>';const used=[...new Set(data.flatMap(x=>Object.keys(x.byC)))];h+='<div class="wklegend">'+used.map(c=>'<span><i style="background:'+(capColor[c]||'var(--gold)')+'"></i>'+(layerName(c)||c)+'</span>').join('')+'</div>';b.innerHTML=h}
+function renderMes(b){const y=calDate.getFullYear(),mo=calDate.getMonth(),first=new Date(y,mo,1),startDow=(first.getDay()+6)%7,dim=new Date(y,mo+1,0).getDate(),today=ymd(new Date());let h='<div class="mgrid">'+['L','M','X','J','V','S','D'].map(d=>'<div class="mdow">'+d+'</div>').join('');for(let i=0;i<startDow;i++)h+='<div></div>';for(let n=1;n<=dim;n++){const k=ymd(new Date(y,mo,n)),evs=state.events.filter(e=>ymd(new Date(e.at))===k),done=evs.filter(e=>e.done).length,ratio=evs.length?done/evs.length:0,op=evs.length?(0.18+ratio*0.55):0;const dot=evs.length?'<span class="mdot" style="background:'+(ratio>=.999?'var(--green)':ratio>0?'var(--amber)':'var(--faint)')+'"></span>':'';h+='<div class="mcell'+(k===today?' today':'')+'" style="background:rgba(95,207,142,'+op.toFixed(2)+')" onclick="calPick('+y+','+mo+','+n+')">'+n+dot+'</div>'}h+='</div>';b.innerHTML=h}
+function calPick(y,mo,n){calDate=new Date(y,mo,n);calView='dia';document.querySelectorAll('.calseg button').forEach((b,i)=>b.classList.toggle('on',i===0));renderCal()}
+function openEvent(){document.getElementById('evLayer').innerHTML=state.layers.map(l=>'<option value="'+l.id+'">'+l.name+'</option>').join('');document.getElementById('evKind').value='workout';evKindCh();document.getElementById('evTitle').value='';document.getElementById('evTime').value='08:00';document.getElementById('evDur').value='60';document.getElementById('modalEvent').classList.add('open')}
+function closeEvent(){document.getElementById('modalEvent').classList.remove('open')}
+function evKindCh(){const map={workout:'salud',stretch:'salud',meditation:'espiritu',reading:'aprendizaje',trade:'finanzas',task:'negocios'};const k=document.getElementById('evKind').value;if(map[k])document.getElementById('evLayer').value=map[k]}
+function saveEvent(){const kind=document.getElementById('evKind').value,sel=document.getElementById('evKind').selectedOptions[0].text;const title=document.getElementById('evTitle').value.trim()||sel,layer=document.getElementById('evLayer').value,tm=document.getElementById('evTime').value||'08:00',dur=Math.max(5,Number(document.getElementById('evDur').value)||60);const p=tm.split(':');const d=new Date(calDate);d.setHours(Number(p[0]),Number(p[1]),0,0);state.events.unshift({id:'e'+Date.now(),kind,title,layer,at:d.toISOString(),dur,done:false});save();closeEvent();if(calView!=='dia'){calView='dia';document.querySelectorAll('.calseg button').forEach((b,i)=>b.classList.toggle('on',i===0))}renderCal();toast('Evento agendado')}
+function renderTasks2(){const L=document.getElementById('taskList2');const rank={alta:0,media:1,baja:2};const arr=state.todos.slice().sort((a,b)=>(a.done-b.done)||(rank[a.priority]-rank[b.priority]));if(!arr.length){L.innerHTML='<p style="color:var(--faint);font-size:13px;text-align:center;padding:20px 0">Sin tareas. Toca "+ Tarea".</p>';return}L.innerHTML=arr.map(t=>{const due=t.due?('📅 '+t.due):'';const subs=(t.subs||[]).map((s,j)=>'<div style="display:flex;gap:8px;align-items:center;margin-top:6px;margin-left:31px"><div class="tkc '+(s.done?'on':'')+'" style="width:16px;height:16px" onclick="toggleSub(\''+t.id+'\','+j+')"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#191407" stroke-width="3.5"><polyline points="20 6 9 17 4 12"/></svg></div><span style="font-size:12.5px;'+(s.done?'color:var(--faint);text-decoration:line-through':'')+'">'+s.t+'</span></div>').join('');return '<div class="tk '+(t.done?'done':'')+'"><div class="tkc '+(t.done?'on':'')+'" onclick="toggleTodo(\''+t.id+'\')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#191407" stroke-width="3.5"><polyline points="20 6 9 17 4 12"/></svg></div><div style="flex:1"><div class="tt">'+t.title+'</div><div class="tmeta"><span class="prio '+t.priority+'">'+t.priority+'</span><span class="lchip">'+(layerName(t.layer)||'—')+'</span>'+(due?'<span class="tkdue">'+due+'</span>':'')+'<span class="tkdue" style="cursor:pointer;color:var(--blue)" onclick="addSub(\''+t.id+'\')">+ sub</span></div>'+subs+'</div><button class="tkx" onclick="delTodo(\''+t.id+'\')">✕</button></div>'}).join('')}
+function openTask(){document.getElementById('tkLayer').innerHTML=state.layers.map(l=>'<option value="'+l.id+'">'+l.name+'</option>').join('');document.getElementById('tkTitle').value='';document.getElementById('tkPrio').value='media';document.getElementById('tkDue').value='';document.getElementById('modalTask').classList.add('open')}
+function closeTask2(){document.getElementById('modalTask').classList.remove('open')}
+function saveTask2(){const title=document.getElementById('tkTitle').value.trim();if(!title){toast('Escribe la tarea');return}state.todos.unshift({id:'k'+Date.now(),title,layer:document.getElementById('tkLayer').value,priority:document.getElementById('tkPrio').value,due:document.getElementById('tkDue').value||'',done:false,subs:[]});save();closeTask2();renderTasks2();toast('Tarea agregada')}
+function toggleTodo(id){const t=state.todos.find(x=>x.id===id);if(!t)return;t.done=!t.done;if(t.done&&t.layer)applyImpact('task',t.layer);save();renderTasks2();drawRadar();if(t.done)toast('✓ '+t.title)}
+function delTodo(id){if(!confirm('¿Eliminar la tarea?'))return;state.todos=state.todos.filter(x=>x.id!==id);save();renderTasks2()}
+function addSub(id){const s=prompt('Subtarea:');if(!s||!s.trim())return;const t=state.todos.find(x=>x.id===id);if(!Array.isArray(t.subs))t.subs=[];t.subs.push({t:s.trim(),done:false});save();renderTasks2()}
+function toggleSub(id,j){const t=state.todos.find(x=>x.id===id);t.subs[j].done=!t.subs[j].done;save();renderTasks2()}
 function tick(){const d=new Date(),dias=['DOMINGO','LUNES','MARTES','MIÉRCOLES','JUEVES','VIERNES','SÁBADO'];const hh=d.getHours(),mm=String(d.getMinutes()).padStart(2,'0');document.getElementById('norteKicker').innerHTML=`${dias[d.getDay()]} · ${hh}:${mm} · <span class="live">EN VIVO</span>`;document.getElementById('sbTime').textContent=hh+':'+mm}
 function initRender(){renderProfile();renderNorte();drawRadar();renderLayers();renderTrading();renderGhosts();renderGente();renderTracks();renderFStat();renderDiario();renderCapital();document.querySelectorAll('.tpre button').forEach(b=>b.classList.toggle('on',Number(b.textContent)===state.focus.dur));document.getElementById('vol').value=Math.round(state.focus.vol*100);document.getElementById('volN').textContent=Math.round(state.focus.vol*100);selectTrack(state.focus.track);remaining=state.focus.dur*60;paintRing()}
 function init(){initRender();tick();setInterval(tick,15000);if(!state.profile.onboarded)document.getElementById('onboard').classList.add('open');else setTimeout(checkReminders,1200);if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{})}
