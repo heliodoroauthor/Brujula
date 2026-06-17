@@ -294,6 +294,14 @@
   .stprogf{height:100%;background:var(--green);border-radius:3px;transition:width .4s}
   .strow{display:flex;gap:8px;margin-top:8px}
   .strow button{flex:1;background:var(--panel);border:1px solid var(--line);color:var(--muted);border-radius:11px;padding:13px;font-family:var(--sans);font-weight:600;font-size:13px;cursor:pointer}
+  /* LANZADOR (Todo a la mano) */
+  .lcat{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:22px 2px 10px}
+  .lcat.first{margin-top:6px}
+  .lgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+  .ltile{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:15px 8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;transition:border-color .15s,transform .1s}
+  .ltile:active{border-color:var(--gold);transform:scale(.96)}
+  .ltile .li{font-size:25px;line-height:1}
+  .ltile .ll{font-size:11px;font-weight:600;color:var(--ink);line-height:1.15}
   .tkdue{font-family:var(--mono);font-size:10px;color:var(--faint)}.tkx{margin-left:auto;background:none;border:0;color:var(--faint);cursor:pointer;font-size:13px}
 </style>
 </head>
@@ -303,7 +311,7 @@
   <div class="view" id="view">
 
     <!-- NORTE -->
-    <section class="screen active" data-screen="norte">
+    <section class="screen" data-screen="norte">
       <div class="kicker" id="norteKicker">MARTES · 6:42 · <span class="live">EN VIVO</span></div>
       <h1 class="big" id="norteGreet">Buenos días.</h1>
       <div class="mission" onclick="editMission()"><div class="lab">Mi misión · mi norte</div><div class="q" id="missionQ">…</div></div>
@@ -359,35 +367,53 @@
     </section>
 
     <!-- SISTEMA -->
-    <section class="screen" data-screen="sistema">
-      <div class="kicker">Tu sistema operativo</div>
-      <h1 class="big">El <em>sistema</em>.</h1>
-      <div class="hub">
-        <div class="hubcard" onclick="go('tiempo')"><div class="hi">⏳</div><div><div class="hn">Radar de tiempo</div><div class="hd">Evidencia dura</div></div></div>
-        <div class="hubcard" onclick="go('diario')"><div class="hi">📓</div><div><div class="hn">Diario estratégico</div><div class="hd">Aprende de cada día</div></div></div>
-        <div class="hubcard" onclick="go('insights')"><div class="hi">🧭</div><div><div class="hn">Insights</div><div class="hd">¿Estás alineado?</div></div></div>
-        <div class="hubcard" onclick="go('enfoque')"><div class="hi">🎧</div><div><div class="hn">Enfoque</div><div class="hd">Trabajo profundo</div></div></div>
-        <div class="hubcard" onclick="go('gente')"><div class="hi">👥</div><div><div class="hn">Gente</div><div class="hd">Semillas de impacto</div></div></div>
-        <div class="hubcard" onclick="go('mente')"><div class="hi">👻</div><div><div class="hn">Mente</div><div class="hd">Tus fantasmas</div></div></div>
-        <div class="hubcard" onclick="go('respira')"><div class="hi">🫁</div><div><div class="hn">Respiración</div><div class="hd">4·7·8, caja, Wim Hof</div></div></div>
-        <div class="hubcard" onclick="go('sugestion')"><div class="hi">✨</div><div><div class="hn">Autosugestión</div><div class="hd">Reprograma tu mente</div></div></div>
-        <div class="hubcard" onclick="go('progreso')"><div class="hi">📊</div><div><div class="hn">Progreso</div><div class="hd">Rachas y logros</div></div></div>
-        <div class="hubcard" onclick="go('manifest')"><div class="hi">🔮</div><div><div class="hn">Manifestación</div><div class="hd">Atrae tu realidad</div></div></div>
-        <div class="hubcard" onclick="go('leyes')"><div class="hi">🌌</div><div><div class="hn">Leyes Cósmicas</div><div class="hd">Vive en alineación</div></div></div>
-        <div class="hubcard" onclick="go('calendario')"><div class="hi">📅</div><div><div class="hn">Calendario</div><div class="hd">Día · Semana · Mes</div></div></div>
-        <div class="hubcard" onclick="go('tareas')"><div class="hi">✅</div><div><div class="hn">Tareas</div><div class="hd">Lo que mueve la aguja</div></div></div>
-        <div class="hubcard" onclick="go('workout')"><div class="hi">🏋️</div><div><div class="hn">Workout</div><div class="hd">Fuerza y progreso</div></div></div>
-        <div class="hubcard" onclick="go('lectura')"><div class="hi">📖</div><div><div class="hn">Lectura</div><div class="hd">Biblioteca y rachas</div></div></div>
-        <div class="hubcard" onclick="go('medita')"><div class="hi">🧘</div><div><div class="hn">Meditación</div><div class="hd">Timer y rachas</div></div></div>
-        <div class="hubcard" onclick="go('estira')"><div class="hi">🤸</div><div><div class="hn">Estiramientos</div><div class="hd">Rutinas guiadas</div></div></div>
+    <section class="screen active" data-screen="sistema">
+      <div class="kicker">Todo, en un solo lugar</div>
+      <h1 class="big">A la <em>mano</em>.</h1>
+      <div class="lcat first">Núcleo</div>
+      <div class="lgrid">
+        <div class="ltile" onclick="go('norte')"><div class="li">🎯</div><div class="ll">Norte</div></div>
+        <div class="ltile" onclick="go('capas')"><div class="li">✦</div><div class="ll">Capas</div></div>
+        <div class="ltile" onclick="go('trading')"><div class="li">📈</div><div class="ll">Trading</div></div>
+        <div class="ltile" onclick="go('capital')"><div class="li">💲</div><div class="ll">Capital</div></div>
       </div>
-      <button class="warbtn" onclick="toggleWar()" style="margin-top:14px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.5 17.5 3 6V3h3l11.5 11.5"/><path d="m13 19 6-6"/><path d="m16 16 4 4"/><path d="m19 21 2-2"/></svg>Modo Guerra</button>
+      <div class="lcat">Cuerpo</div>
+      <div class="lgrid">
+        <div class="ltile" onclick="go('workout')"><div class="li">🏋️</div><div class="ll">Workout</div></div>
+        <div class="ltile" onclick="go('medita')"><div class="li">🧘</div><div class="ll">Meditación</div></div>
+        <div class="ltile" onclick="go('estira')"><div class="li">🤸</div><div class="ll">Estiramientos</div></div>
+        <div class="ltile" onclick="go('respira')"><div class="li">🫁</div><div class="ll">Respiración</div></div>
+      </div>
+      <div class="lcat">Mente</div>
+      <div class="lgrid">
+        <div class="ltile" onclick="go('mente')"><div class="li">👻</div><div class="ll">Mente</div></div>
+        <div class="ltile" onclick="go('sugestion')"><div class="li">✨</div><div class="ll">Autosugestión</div></div>
+        <div class="ltile" onclick="go('hipnosis')"><div class="li">🌀</div><div class="ll">Hipnosis</div></div>
+        <div class="ltile" onclick="go('manifest')"><div class="li">🔮</div><div class="ll">Manifestación</div></div>
+        <div class="ltile" onclick="go('leyes')"><div class="li">🌌</div><div class="ll">Leyes</div></div>
+      </div>
+      <div class="lcat">Productividad</div>
+      <div class="lgrid">
+        <div class="ltile" onclick="go('calendario')"><div class="li">📅</div><div class="ll">Calendario</div></div>
+        <div class="ltile" onclick="go('tareas')"><div class="li">✅</div><div class="ll">Tareas</div></div>
+        <div class="ltile" onclick="go('tiempo')"><div class="li">⏳</div><div class="ll">Tiempo</div></div>
+        <div class="ltile" onclick="go('enfoque')"><div class="li">🎧</div><div class="ll">Enfoque</div></div>
+      </div>
+      <div class="lcat">Reflexión</div>
+      <div class="lgrid">
+        <div class="ltile" onclick="go('diario')"><div class="li">📓</div><div class="ll">Diario</div></div>
+        <div class="ltile" onclick="go('insights')"><div class="li">🧭</div><div class="ll">Insights</div></div>
+        <div class="ltile" onclick="go('progreso')"><div class="li">📊</div><div class="ll">Progreso</div></div>
+        <div class="ltile" onclick="go('gente')"><div class="li">👥</div><div class="ll">Gente</div></div>
+        <div class="ltile" onclick="go('lectura')"><div class="li">📖</div><div class="ll">Lectura</div></div>
+      </div>
+      <button class="warbtn" onclick="toggleWar()" style="margin-top:22px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.5 17.5 3 6V3h3l11.5 11.5"/><path d="m13 19 6-6"/><path d="m16 16 4 4"/><path d="m19 21 2-2"/></svg>Modo Guerra</button>
       <button class="notifbtn" onclick="openSettings()">⚙ Ajustes y respaldo</button>
     </section>
 
     <!-- TIEMPO -->
     <section class="screen" data-screen="tiempo">
-      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Sistema</button>
+      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Todo</button>
       <div class="kicker">Lo que no se mide no se controla</div>
       <h1 class="big">Radar de <em>tiempo</em>.</h1>
       <div class="card" style="margin-top:14px">
@@ -403,7 +429,7 @@
 
     <!-- DIARIO -->
     <section class="screen" data-screen="diario">
-      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Sistema</button>
+      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Todo</button>
       <div class="kicker">Conocimiento acumulativo</div>
       <h1 class="big">Diario <em>estratégico</em>.</h1>
       <div class="card dform" style="margin-top:14px">
@@ -417,7 +443,7 @@
 
     <!-- INSIGHTS -->
     <section class="screen" data-screen="insights">
-      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Sistema</button>
+      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Todo</button>
       <div class="kicker">Tu copiloto · basado en tus datos</div>
       <h1 class="big">¿Estás <em>alineado</em>?</h1>
       <div id="insList" style="margin-top:14px"></div>
@@ -426,7 +452,7 @@
 
     <!-- ENFOQUE -->
     <section class="screen" data-screen="enfoque">
-      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Sistema</button>
+      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Todo</button>
       <div class="kicker">Enfoque · Trabajo profundo</div>
       <h1 class="big" style="font-family:var(--sans);font-weight:700;font-size:28px">Enfoque</h1>
       <div class="launch" onclick="go('hipnosis')" style="margin-top:12px;background:linear-gradient(100deg,rgba(192,76,224,.2),rgba(123,92,255,.08))"><div class="play" style="background:linear-gradient(135deg,#c04ce0,#7b5cff)">🌀</div><div><div class="tt">Modo Hipnosis</div><div class="ss">Sugestión guiada + binaurales theta</div></div></div>
@@ -444,7 +470,7 @@
 
     <!-- GENTE -->
     <section class="screen" data-screen="gente">
-      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Sistema</button>
+      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Todo</button>
       <div class="kicker">Relaciones desinteresadas</div>
       <h1 class="big">Tu <em>gente</em>.</h1>
       <div class="seclabel">A quién nutrir <span class="tag" id="seedTotal"></span></div>
@@ -453,7 +479,7 @@
 
     <!-- MENTE -->
     <section class="screen" data-screen="mente">
-      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Sistema</button>
+      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Todo</button>
       <div class="kicker">Diálogo interno</div>
       <h1 class="big">Tu <em>mente</em>.</h1>
       <div class="seclabel">Tus fantasmas</div><div id="ghostList"></div>
@@ -474,7 +500,7 @@
 
     <!-- RESPIRACIÓN -->
     <section class="screen" data-screen="respira">
-      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Sistema</button>
+      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Todo</button>
       <div class="kicker">Coherencia · HRV</div>
       <h1 class="big">Respira con <em>intención</em>.</h1>
       <div class="borbwrap"><div class="borb" id="borb"><span class="bph" id="bph">Listo</span></div></div>
@@ -502,7 +528,7 @@
 
     <!-- PROGRESO -->
     <section class="screen" data-screen="progreso">
-      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Sistema</button>
+      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Todo</button>
       <div class="kicker">Lo que se mide, se domina</div>
       <h1 class="big">Tu <em>progreso</em>.</h1>
       <div class="pstat" id="pStats"></div>
@@ -512,7 +538,7 @@
 
     <!-- MANIFESTACIÓN -->
     <section class="screen" data-screen="manifest">
-      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Sistema</button>
+      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Todo</button>
       <div class="kicker">Manifestación · El Secreto</div>
       <h1 class="big">Atrae tu <em>realidad</em>.</h1>
       <div class="seclabel">Vibración de hoy <span class="tag">1–10</span></div>
@@ -532,7 +558,7 @@
 
     <!-- LEYES CÓSMICAS -->
     <section class="screen" data-screen="leyes">
-      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Sistema</button>
+      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Todo</button>
       <div class="kicker">Principios universales</div>
       <h1 class="big">Leyes <em>cósmicas</em>.</h1>
       <div class="radarwrap"><svg id="mandala" width="320" height="280" viewBox="0 0 320 280"></svg></div>
@@ -545,7 +571,7 @@
 
     <!-- CALENDARIO -->
     <section class="screen" data-screen="calendario">
-      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Sistema</button>
+      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Todo</button>
       <div class="kicker">Tu tiempo, una sola vista</div>
       <h1 class="big">Calen<em>dario</em>.</h1>
       <div class="calseg"><button class="on" onclick="setCalView('dia',this)">Día</button><button onclick="setCalView('sem',this)">Semana</button><button onclick="setCalView('mes',this)">Mes</button></div>
@@ -556,7 +582,7 @@
 
     <!-- TAREAS -->
     <section class="screen" data-screen="tareas">
-      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Sistema</button>
+      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Todo</button>
       <div class="kicker">Lo que mueve la aguja</div>
       <h1 class="big">Tus <em>tareas</em>.</h1>
       <button class="addbtn" onclick="openTask()" style="margin-top:14px">+ Tarea</button>
@@ -565,7 +591,7 @@
 
     <!-- WORKOUT -->
     <section class="screen" data-screen="workout">
-      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Sistema</button>
+      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Todo</button>
       <div class="kicker">Fuerza que se acumula</div>
       <h1 class="big">Tu <em>cuerpo</em>.</h1>
       <div class="calseg wseg" id="wSeg"><button class="on" onclick="setWView('train',this)">Entrenar</button><button onclick="setWView('rut',this)">Rutinas</button><button onclick="setWView('prog',this)">Progreso</button></div>
@@ -574,7 +600,7 @@
 
     <!-- LECTURA -->
     <section class="screen" data-screen="lectura">
-      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Sistema</button>
+      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Todo</button>
       <div class="kicker">Una página a la vez</div>
       <h1 class="big">Tu <em>lectura</em>.</h1>
       <div class="calseg wseg" id="rSeg"><button class="on" onclick="setRView('leer',this)">Leer</button><button onclick="setRView('bib',this)">Biblioteca</button><button onclick="setRView('prog',this)">Progreso</button></div>
@@ -583,7 +609,7 @@
 
     <!-- MEDITACIÓN -->
     <section class="screen" data-screen="medita">
-      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Sistema</button>
+      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Todo</button>
       <div class="kicker">Silencio que ordena</div>
       <h1 class="big">Medi<em>tación</em>.</h1>
       <div class="calseg wseg" id="mSeg"><button class="on" onclick="setMView('go',this)">Meditar</button><button onclick="setMView('prog',this)">Progreso</button></div>
@@ -592,7 +618,7 @@
 
     <!-- ESTIRAMIENTOS -->
     <section class="screen" data-screen="estira">
-      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Sistema</button>
+      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Todo</button>
       <div class="kicker">Suelta la tensión</div>
       <h1 class="big">Esti<em>ramientos</em>.</h1>
       <div class="calseg wseg" id="sSeg"><button class="on" onclick="setSView('go',this)">Estirar</button><button onclick="setSView('prog',this)">Progreso</button></div>
@@ -601,11 +627,11 @@
   </div>
 
   <nav class="nav" id="nav">
-    <button class="on" data-nav="norte" onclick="go('norte')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><polygon points="15.5,8.5 11,11 8.5,15.5 13,13" fill="currentColor" stroke="none"/></svg>Norte</button>
+    <button class="on" data-nav="sistema" onclick="go('sistema')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Todo</button>
+    <button data-nav="norte" onclick="go('norte')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><polygon points="15.5,8.5 11,11 8.5,15.5 13,13" fill="currentColor" stroke="none"/></svg>Norte</button>
     <button data-nav="capas" onclick="go('capas')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><polygon points="12 2 15 9 22 9.5 16.5 14 18.5 21 12 17 5.5 21 7.5 14 2 9.5 9 9"/></svg>Capas</button>
     <button data-nav="trading" onclick="go('trading')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><polyline points="3 17 9 11 13 15 21 6"/><polyline points="15 6 21 6 21 12"/></svg>Trading</button>
     <button data-nav="capital" onclick="go('capital')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Capital</button>
-    <button data-nav="sistema" onclick="go('sistema')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Sistema</button>
   </nav>
 
   <div class="modal" id="modalMov"><div class="sheet"><div class="grab"></div><h2>Movimiento de hoy</h2><p class="hint">Toda acción te acerca o te aleja del norte.</p>
