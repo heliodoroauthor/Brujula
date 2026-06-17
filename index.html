@@ -253,6 +253,26 @@
   .wsess .l .mt{font-size:11px;color:var(--faint);margin-top:2px}
   .wsess .r{text-align:right;font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.5}
   .rxchk{display:flex;align-items:center;gap:9px;padding:9px 2px;border-bottom:1px solid var(--line);cursor:pointer}
+  /* LECTURA */
+  .sheet textarea{width:100%;background:#0e1116;border:1px solid var(--line);border-radius:11px;padding:11px;color:var(--ink);font-family:var(--sans);font-size:13.5px;resize:vertical;min-height:60px}
+  .bkcard{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:14px;margin-top:10px}
+  .bkcard .bt{font-weight:600;font-size:14.5px}
+  .bkcard .ba{font-size:11.5px;color:var(--faint);margin-top:2px}
+  .bkbar{height:6px;background:#0f1218;border-radius:4px;overflow:hidden;margin-top:11px}
+  .bkfill{height:100%;background:var(--amber);border-radius:4px}
+  .bkmeta{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+  .bkst{font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:5px;white-space:nowrap}
+  .bkst.leyendo{color:var(--green);background:rgba(95,207,142,.13)}
+  .bkst.pendiente{color:var(--muted);background:#1a1e26}
+  .bkst.leido{color:var(--gold);background:rgba(201,169,97,.13)}
+  .readbtn{background:var(--amber);color:#1a1305;border:0;border-radius:9px;padding:8px 13px;font-weight:700;font-size:12.5px;cursor:pointer;font-family:var(--sans)}
+  .qcard{background:var(--panel);border:1px solid var(--line);border-left:2px solid var(--gold);border-radius:9px;padding:11px 14px;margin-top:9px}
+  .qcard .qt{font-family:var(--serif);font-style:italic;font-size:14px;line-height:1.45}
+  .qcard .qb{font-family:var(--mono);font-size:10px;color:var(--faint);margin-top:7px}
+  .pgbars{display:flex;gap:4px;align-items:flex-end;height:96px;margin-top:14px}
+  .pgcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px}
+  .pgbar{width:100%;background:var(--amber);border-radius:4px 4px 0 0;min-height:2px}
+  .pgd{font-family:var(--mono);font-size:8px;color:var(--faint)}
   .tkdue{font-family:var(--mono);font-size:10px;color:var(--faint)}.tkx{margin-left:auto;background:none;border:0;color:var(--faint);cursor:pointer;font-size:13px}
 </style>
 </head>
@@ -336,6 +356,7 @@
         <div class="hubcard" onclick="go('calendario')"><div class="hi">📅</div><div><div class="hn">Calendario</div><div class="hd">Día · Semana · Mes</div></div></div>
         <div class="hubcard" onclick="go('tareas')"><div class="hi">✅</div><div><div class="hn">Tareas</div><div class="hd">Lo que mueve la aguja</div></div></div>
         <div class="hubcard" onclick="go('workout')"><div class="hi">🏋️</div><div><div class="hn">Workout</div><div class="hd">Fuerza y progreso</div></div></div>
+        <div class="hubcard" onclick="go('lectura')"><div class="hi">📖</div><div><div class="hn">Lectura</div><div class="hd">Biblioteca y rachas</div></div></div>
       </div>
       <button class="warbtn" onclick="toggleWar()" style="margin-top:14px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.5 17.5 3 6V3h3l11.5 11.5"/><path d="m13 19 6-6"/><path d="m16 16 4 4"/><path d="m19 21 2-2"/></svg>Modo Guerra</button>
       <button class="notifbtn" onclick="openSettings()">⚙ Ajustes y respaldo</button>
@@ -527,6 +548,15 @@
       <div class="calseg wseg" id="wSeg"><button class="on" onclick="setWView('train',this)">Entrenar</button><button onclick="setWView('rut',this)">Rutinas</button><button onclick="setWView('prog',this)">Progreso</button></div>
       <div id="wBody"></div>
     </section>
+
+    <!-- LECTURA -->
+    <section class="screen" data-screen="lectura">
+      <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Sistema</button>
+      <div class="kicker">Una página a la vez</div>
+      <h1 class="big">Tu <em>lectura</em>.</h1>
+      <div class="calseg wseg" id="rSeg"><button class="on" onclick="setRView('leer',this)">Leer</button><button onclick="setRView('bib',this)">Biblioteca</button><button onclick="setRView('prog',this)">Progreso</button></div>
+      <div id="rBody"></div>
+    </section>
   </div>
 
   <nav class="nav" id="nav">
@@ -624,6 +654,20 @@
     <button class="save" onclick="saveRoutine()">Guardar rutina</button><button class="cancel" onclick="closeRoutine()">Cancelar</button>
   </div></div>
 
+  <div class="modal" id="modalBook"><div class="sheet"><div class="grab"></div><h2 id="bkTitle">Añadir libro</h2><p class="hint">Tu biblioteca. Lo que lees te construye.</p>
+    <div class="field"><label>Título</label><input id="bkName" placeholder="El nombre del libro"></div>
+    <div class="field"><label>Autor</label><input id="bkAuthor" placeholder="Autor"></div>
+    <div class="two"><div class="field"><label>Páginas totales</label><input id="bkPages" type="number" placeholder="320"></div><div class="field"><label>Estado</label><select id="bkStatus"><option value="leyendo">Leyendo</option><option value="pendiente">Pendiente</option><option value="leido">Leído</option></select></div></div>
+    <button class="save" onclick="saveBook()">Guardar</button><button class="cancel" onclick="closeBook()">Cancelar</button>
+  </div></div>
+
+  <div class="modal" id="modalRead"><div class="sheet"><div class="grab"></div><h2>Registrar lectura</h2><p class="hint">¿Cuánto avanzaste? Cada página suma a tu Aprendizaje.</p>
+    <div class="field"><label>Libro</label><select id="rdBook"></select></div>
+    <div class="two"><div class="field"><label>Páginas leídas</label><input id="rdPages" type="number" placeholder="20"></div><div class="field"><label>Minutos (opcional)</label><input id="rdMin" type="number" placeholder="30"></div></div>
+    <div class="field"><label>Cita o idea (opcional)</label><textarea id="rdQuote" placeholder="Algo que quieras recordar…"></textarea></div>
+    <button class="save" onclick="saveRead()">Guardar lectura</button><button class="cancel" onclick="closeRead()">Cancelar</button>
+  </div></div>
+
   <div class="toast" id="toast"></div>
 </div>
 
@@ -684,6 +728,22 @@ const defaults={
       {id:'ws4',t:isoAgo(2),name:'Tirón',dur:62,sets:[{ex:'Peso muerto',reps:5,w:100},{ex:'Peso muerto',reps:5,w:105},{ex:'Peso muerto',reps:3,w:115},{ex:'Dominadas',reps:8,w:0},{ex:'Dominadas',reps:7,w:0}]}
     ]
   },
+  reading:{
+    books:[
+      {id:'b1',title:'Padre Rico, Padre Pobre',author:'Robert Kiyosaki',status:'leyendo',pages:240,page:96,started:isoAgo(20)},
+      {id:'b2',title:'El Poder del Ahora',author:'Eckhart Tolle',status:'leyendo',pages:236,page:58,started:isoAgo(8)},
+      {id:'b3',title:'Trading in the Zone',author:'Mark Douglas',status:'pendiente',pages:240,page:0,started:''},
+      {id:'b4',title:'Hábitos Atómicos',author:'James Clear',status:'leido',pages:320,page:320,started:isoAgo(60)}
+    ],
+    logs:[
+      {id:'rl1',bookId:'b4',pages:25,min:30,quote:'Te elevas al nivel de tus sistemas, no de tus metas.',t:isoAgo(9)},
+      {id:'rl2',bookId:'b1',pages:30,min:35,quote:'',t:isoAgo(5)},
+      {id:'rl3',bookId:'b1',pages:22,min:25,quote:'Los ricos compran activos; los pobres solo acumulan gastos.',t:isoAgo(3)},
+      {id:'rl4',bookId:'b2',pages:18,min:20,quote:'',t:isoAgo(2)},
+      {id:'rl5',bookId:'b1',pages:24,min:28,quote:'',t:isoAgo(1)},
+      {id:'rl6',bookId:'b2',pages:20,min:22,quote:'El ahora es el único lugar donde la vida ocurre.',t:isoAgo(0)}
+    ]
+  },
   impactLog:[],
   war:['Dormir 7h','Ejercicio','Trading con plan','Empresa principal (Tequio)'],
   focus:{sessions:0,min:0,dur:25,track:0,vol:0.18,log:[]},
@@ -701,10 +761,10 @@ const defaults={
   ]
 };
 let state=load();
-function load(){let m=JSON.parse(JSON.stringify(defaults));try{const s=JSON.parse(localStorage.getItem(KEY));if(s){for(const k in s)m[k]=s[k];m.profile=Object.assign({},defaults.profile,s.profile||{});m.focus=Object.assign({},defaults.focus,s.focus||{});m.finance=Object.assign({},defaults.finance,s.finance||{});m.ideal=Object.assign({},defaults.ideal,s.ideal||{});m.sugestion=Object.assign({},defaults.sugestion,s.sugestion||{});m.manifest=Object.assign({},defaults.manifest,s.manifest||{});['vibra','afir','vision'].forEach(k=>{if(!Array.isArray(m.manifest[k]))m.manifest[k]=[]});m.leyes=Object.assign({log:[]},defaults.leyes,s.leyes||{});if(!Array.isArray(m.leyes.log))m.leyes.log=[];['layers','movimientos','timeLog','diario','war','people','trades','events','todos'].forEach(k=>{if(!Array.isArray(m[k])||(!m[k].length&&defaults[k].length))m[k]=defaults[k]});if(!Array.isArray(m.impactLog))m.impactLog=[];m.workout=Object.assign({ex:[],routines:[],sessions:[],active:null},defaults.workout,s.workout||{});['ex','routines','sessions'].forEach(k=>{if(!Array.isArray(m.workout[k]))m.workout[k]=(defaults.workout[k]||[]).slice()})}}catch(e){}m.trades.forEach(t=>{if(t.plan===undefined)t.plan=!(t.emo==='FOMO'||t.emo==='Revancha')});m.people.forEach(p=>{if(!Array.isArray(p.seeds))p.seeds=[]});return m}
+function load(){let m=JSON.parse(JSON.stringify(defaults));try{const s=JSON.parse(localStorage.getItem(KEY));if(s){for(const k in s)m[k]=s[k];m.profile=Object.assign({},defaults.profile,s.profile||{});m.focus=Object.assign({},defaults.focus,s.focus||{});m.finance=Object.assign({},defaults.finance,s.finance||{});m.ideal=Object.assign({},defaults.ideal,s.ideal||{});m.sugestion=Object.assign({},defaults.sugestion,s.sugestion||{});m.manifest=Object.assign({},defaults.manifest,s.manifest||{});['vibra','afir','vision'].forEach(k=>{if(!Array.isArray(m.manifest[k]))m.manifest[k]=[]});m.leyes=Object.assign({log:[]},defaults.leyes,s.leyes||{});if(!Array.isArray(m.leyes.log))m.leyes.log=[];['layers','movimientos','timeLog','diario','war','people','trades','events','todos'].forEach(k=>{if(!Array.isArray(m[k])||(!m[k].length&&defaults[k].length))m[k]=defaults[k]});if(!Array.isArray(m.impactLog))m.impactLog=[];m.workout=Object.assign({ex:[],routines:[],sessions:[],active:null},defaults.workout,s.workout||{});['ex','routines','sessions'].forEach(k=>{if(!Array.isArray(m.workout[k]))m.workout[k]=(defaults.workout[k]||[]).slice()});m.reading=Object.assign({books:[],logs:[]},defaults.reading,s.reading||{});['books','logs'].forEach(k=>{if(!Array.isArray(m.reading[k]))m.reading[k]=(defaults.reading[k]||[]).slice()})}}catch(e){}m.trades.forEach(t=>{if(t.plan===undefined)t.plan=!(t.emo==='FOMO'||t.emo==='Revancha')});m.people.forEach(p=>{if(!Array.isArray(p.seeds))p.seeds=[]});return m}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2000)}
-function go(s){document.querySelectorAll('.screen').forEach(x=>x.classList.toggle('active',x.dataset.screen===s));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.nav===s));document.getElementById('view').scrollTop=0;if(s==='insights')renderInsights();if(s==='tiempo')renderTiempoScreen();if(s==='capital')renderCapital();if(s==='capas')drawRadar();if(s==='trading')renderReplay();if(s==='hipnosis')renderHypno();if(s!=='hipnosis')stopHypno();if(s==='respira')renderBreath();if(s!=='respira')stopBreath();if(s==='sugestion')renderSug();if(s==='progreso')renderProgreso();if(s==='manifest')renderManifest();if(s==='leyes')renderLeyes();if(s==='calendario')renderCal();if(s==='tareas')renderTasks2();if(s==='workout')renderWorkout();if(s!=='workout'&&wTimer){clearInterval(wTimer);wTimer=null}if(s!=='sugestion')stopGuide()}
+function go(s){document.querySelectorAll('.screen').forEach(x=>x.classList.toggle('active',x.dataset.screen===s));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.nav===s));document.getElementById('view').scrollTop=0;if(s==='insights')renderInsights();if(s==='tiempo')renderTiempoScreen();if(s==='capital')renderCapital();if(s==='capas')drawRadar();if(s==='trading')renderReplay();if(s==='hipnosis')renderHypno();if(s!=='hipnosis')stopHypno();if(s==='respira')renderBreath();if(s!=='respira')stopBreath();if(s==='sugestion')renderSug();if(s==='progreso')renderProgreso();if(s==='manifest')renderManifest();if(s==='leyes')renderLeyes();if(s==='calendario')renderCal();if(s==='tareas')renderTasks2();if(s==='workout')renderWorkout();if(s!=='workout'&&wTimer){clearInterval(wTimer);wTimer=null}if(s==='lectura')renderReading();if(s!=='sugestion')stopGuide()}
 const money=n=>'$'+Math.round(n).toLocaleString('en-US');
 const layerName=id=>{const l=state.layers.find(x=>x.id===id);return l?l.name:'—'};
 function finishOnboard(){state.profile.name=document.getElementById('obName').value.trim();const mi=document.getElementById('obMission').value.trim();if(mi)state.profile.mission=mi;state.profile.onboarded=true;save();document.getElementById('onboard').classList.remove('open');renderProfile();renderNorte()}
@@ -972,6 +1032,43 @@ function strengthBlock(ex){const pts=[];state.workout.sessions.slice().sort((a,b
   else chart='<p style="color:var(--faint);font-size:12px;padding:8px 0">Registra otra sesión con este ejercicio para ver la curva.</p>';
   return '<div class="wexc"><div style="display:flex;justify-content:space-between;align-items:flex-end"><div><div style="font-family:var(--serif);font-size:26px;color:var(--gold)">'+(pr||0)+' kg</div><div style="font-family:var(--mono);font-size:8.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--faint)">Récord (PR)</div></div><div style="text-align:right"><div style="font-family:var(--serif);font-size:26px">'+best1+' kg</div><div style="font-family:var(--mono);font-size:8.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--faint)">1RM estimado</div></div></div>'+chart+'</div>'}
 function delSession(id){if(!confirm('¿Borrar este entreno del historial?'))return;state.workout.sessions=state.workout.sessions.filter(x=>x.id!==id);save();renderWProg(document.getElementById('wBody'))}
+/* ===== LECTURA ===== */
+let rView='leer',bkEdit=null;
+function bookById(id){return state.reading.books.find(b=>b.id===id)}
+function bookPct(b){return b.pages>0?Math.min(100,Math.round(b.page/b.pages*100)):0}
+function pagesTotal(){return state.reading.logs.reduce((a,l)=>a+(+l.pages||0),0)}
+function pagesThisWeek(){const n=Date.now();return state.reading.logs.filter(l=>n-new Date(l.t)<7*DAY).reduce((a,l)=>a+(+l.pages||0),0)}
+function readingStreak(){const days=new Set(state.reading.logs.map(l=>ymd(new Date(l.t))));let st=0,d=new Date();for(;;){if(days.has(ymd(d))){st++;d.setDate(d.getDate()-1)}else if(st===0&&ymd(d)===ymd(new Date())){d.setDate(d.getDate()-1)}else break}return st}
+function setRView(v,btn){rView=v;document.querySelectorAll('#rSeg button').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderReading()}
+function renderReading(){const b=document.getElementById('rBody');if(!b)return;if(rView==='leer')renderRLeer(b);else if(rView==='bib')renderRBib(b);else renderRProg(b)}
+function renderRLeer(b){const now=state.reading.books.filter(x=>x.status==='leyendo');let h='';
+  if(!now.length)h+='<p style="color:var(--faint);font-size:13px;padding:8px 0">No tienes libros en curso. Ve a Biblioteca y marca uno como "Leyendo".</p>';
+  else{h+='<div class="seclabel">Leyendo ahora</div>';now.forEach(bk=>{const pct=bookPct(bk);h+='<div class="bkcard"><div class="bt">'+bk.title+'</div><div class="ba">'+(bk.author||'')+'</div><div class="bkbar"><div class="bkfill" style="width:'+pct+'%"></div></div><div class="bkmeta"><span>pág. '+bk.page+' / '+bk.pages+' · '+pct+'%</span><button class="readbtn" onclick="openRead(\''+bk.id+'\')">+ Registrar</button></div></div>'})}
+  h+='<button class="addbtn" style="margin-top:14px" onclick="openRead(\'\')">+ Registrar lectura</button>';
+  const q=state.reading.logs.filter(l=>l.quote).slice(-1)[0];
+  if(q){const bk=bookById(q.bookId);h+='<div class="seclabel" style="margin-top:24px">Última idea guardada</div><div class="qcard"><div class="qt">“'+q.quote+'”</div><div class="qb">'+(bk?bk.title:'')+'</div></div>'}
+  b.innerHTML=h}
+function renderRBib(b){let h='<button class="addbtn" onclick="openBook()">+ Añadir libro</button>';const order={leyendo:0,pendiente:1,leido:2};const books=state.reading.books.slice().sort((a,c)=>order[a.status]-order[c.status]);
+  if(!books.length)h+='<p style="color:var(--faint);font-size:13px;text-align:center;padding:16px 0">Tu biblioteca está vacía.</p>';
+  const stLbl={leyendo:'Leyendo',pendiente:'Pendiente',leido:'Leído'};
+  books.forEach(bk=>{const pct=bookPct(bk);h+='<div class="bkcard"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px"><div><div class="bt">'+bk.title+'</div><div class="ba">'+(bk.author||'')+'</div></div><span class="bkst '+bk.status+'">'+stLbl[bk.status]+'</span></div><div class="bkbar"><div class="bkfill" style="width:'+pct+'%"></div></div><div class="bkmeta"><span>pág. '+bk.page+' / '+bk.pages+'</span><span><button class="ex-del" onclick="openBook(\''+bk.id+'\')">editar</button> · <button class="ex-del" style="color:var(--red)" onclick="delBook(\''+bk.id+'\')">borrar</button></span></div></div>'});
+  b.innerHTML=h}
+function renderRProg(b){const leidos=state.reading.books.filter(x=>x.status==='leido').length;
+  let h='<div class="wstats"><div class="wstat"><div class="v">'+leidos+'</div><div class="k">Libros leídos</div></div><div class="wstat"><div class="v">'+pagesTotal()+'</div><div class="k">Páginas total</div></div><div class="wstat"><div class="v">'+readingStreak()+'</div><div class="k">Racha días</div></div></div>';
+  h+='<div class="seclabel" style="margin-top:22px">Páginas · 14 días <span class="tag">'+pagesThisWeek()+' esta semana</span></div>';
+  const days=[];for(let i=13;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);days.push(d)}
+  const byDay=days.map(d=>state.reading.logs.filter(l=>ymd(new Date(l.t))===ymd(d)).reduce((a,l)=>a+(+l.pages||0),0));const mx=Math.max(...byDay,1);
+  h+='<div class="pgbars">'+days.map((d,i)=>'<div class="pgcol"><div class="pgbar" style="height:'+(byDay[i]/mx*80)+'px;opacity:'+(byDay[i]?1:.25)+'"></div><div class="pgd">'+d.getDate()+'</div></div>').join('')+'</div>';
+  const quotes=state.reading.logs.filter(l=>l.quote).slice().reverse();
+  if(quotes.length){h+='<div class="seclabel" style="margin-top:24px">Citas guardadas</div>';quotes.forEach(q=>{const bk=bookById(q.bookId);h+='<div class="qcard"><div class="qt">“'+q.quote+'”</div><div class="qb">'+(bk?bk.title:'')+' · '+fmtDate(q.t)+'</div></div>'})}
+  b.innerHTML=h}
+function openBook(id){bkEdit=id||null;const bk=id?bookById(id):null;document.getElementById('bkTitle').textContent=bk?'Editar libro':'Añadir libro';document.getElementById('bkName').value=bk?bk.title:'';document.getElementById('bkAuthor').value=bk?(bk.author||''):'';document.getElementById('bkPages').value=bk?bk.pages:'';document.getElementById('bkStatus').value=bk?bk.status:'leyendo';document.getElementById('modalBook').classList.add('open')}
+function closeBook(){document.getElementById('modalBook').classList.remove('open')}
+function saveBook(){const title=document.getElementById('bkName').value.trim();if(!title){toast('Escribe el título');return}const author=document.getElementById('bkAuthor').value.trim();const pages=Math.max(1,Number(document.getElementById('bkPages').value)||1);const status=document.getElementById('bkStatus').value;if(bkEdit){const bk=bookById(bkEdit);bk.title=title;bk.author=author;bk.pages=pages;bk.status=status;if(status==='leido')bk.page=pages;if(status==='leyendo'&&!bk.started)bk.started=new Date().toISOString();if(bk.page>pages)bk.page=pages}else state.reading.books.push({id:'b'+Date.now(),title,author,status,pages,page:status==='leido'?pages:0,started:status==='pendiente'?'':new Date().toISOString()});save();closeBook();renderReading();toast('Libro guardado')}
+function delBook(id){if(!confirm('¿Borrar este libro?'))return;state.reading.books=state.reading.books.filter(b=>b.id!==id);save();renderReading()}
+function openRead(bookId){const opts=state.reading.books.filter(b=>b.status!=='leido');if(!opts.length){toast('Añade un libro primero');go&&go('lectura');rView='bib';document.querySelectorAll('#rSeg button').forEach((x,i)=>x.classList.toggle('on',i===1));renderReading();return}const sel=document.getElementById('rdBook');sel.innerHTML=opts.map(b=>'<option value="'+b.id+'">'+b.title+'</option>').join('');if(bookId)sel.value=bookId;document.getElementById('rdPages').value='';document.getElementById('rdMin').value='';document.getElementById('rdQuote').value='';document.getElementById('modalRead').classList.add('open')}
+function closeRead(){document.getElementById('modalRead').classList.remove('open')}
+function saveRead(){const bk=bookById(document.getElementById('rdBook').value);if(!bk){toast('Elige un libro');return}const pages=Math.max(0,Number(document.getElementById('rdPages').value)||0);const min=Math.max(0,Number(document.getElementById('rdMin').value)||0);const quote=document.getElementById('rdQuote').value.trim();if(!pages&&!quote){toast('Registra páginas o una cita');return}state.reading.logs.push({id:'rl'+Date.now(),bookId:bk.id,pages,min,quote,t:new Date().toISOString()});let done=false;if(pages){bk.page=Math.min(bk.pages,bk.page+pages);if(bk.status==='pendiente')bk.status='leyendo';if(bk.page>=bk.pages){bk.status='leido';bk.page=bk.pages;done=true}}applyImpact('reading','aprendizaje');state.events.unshift({id:'e'+Date.now(),kind:'reading',title:'Lectura: '+bk.title,layer:'aprendizaje',at:new Date().toISOString(),dur:min||20,done:true});save();closeRead();drawRadar();renderReading();toast(done?'📖 ¡Terminaste '+bk.title+'!':'📖 +'+pages+' págs · Aprendizaje +0.2')}
 function tick(){const d=new Date(),dias=['DOMINGO','LUNES','MARTES','MIÉRCOLES','JUEVES','VIERNES','SÁBADO'];const hh=d.getHours(),mm=String(d.getMinutes()).padStart(2,'0');document.getElementById('norteKicker').innerHTML=`${dias[d.getDay()]} · ${hh}:${mm} · <span class="live">EN VIVO</span>`;document.getElementById('sbTime').textContent=hh+':'+mm}
 function initRender(){renderProfile();renderNorte();drawRadar();renderLayers();renderTrading();renderGhosts();renderGente();renderTracks();renderFStat();renderDiario();renderCapital();document.querySelectorAll('.tpre button').forEach(b=>b.classList.toggle('on',Number(b.textContent)===state.focus.dur));document.getElementById('vol').value=Math.round(state.focus.vol*100);document.getElementById('volN').textContent=Math.round(state.focus.vol*100);selectTrack(state.focus.track);remaining=state.focus.dur*60;paintRing()}
 function init(){initRender();tick();setInterval(tick,15000);if(!state.profile.onboarded)document.getElementById('onboard').classList.add('open');else setTimeout(checkReminders,1200);if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{})}
