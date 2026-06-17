@@ -336,6 +336,8 @@
   .hscrow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:6px 0 8px}
   .hscrow button{background:#0f1218;border:1px solid var(--line);color:var(--ink);border-radius:9px;padding:12px 0;font-family:var(--mono);font-size:15px;cursor:pointer}
   .hscrow button:active{background:var(--gold);color:#191407}
+  .modhelp{background:var(--panel);border:1px solid var(--line);border-left:2px solid var(--gold);border-radius:9px;padding:11px 13px;font-size:12.5px;color:var(--muted);line-height:1.55;margin:12px 0 4px}
+  .modhelp b{color:var(--ink);font-weight:600}
   /* ALARMAS */
   .alrow{display:flex;align-items:center;gap:12px;padding:13px 2px;border-bottom:1px solid var(--line)}
   .altime{font-family:var(--mono);font-size:22px;width:62px;flex:none}
@@ -457,6 +459,7 @@
       <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Sistema</button>
       <div class="kicker">Lo que no se mide no se controla</div>
       <h1 class="big">Radar de <em>tiempo</em>.</h1>
+      <div class="modhelp"><b>¿Para qué sirve?</b> Ver dónde se va tu tiempo de verdad. Elige una capa y usa el cronómetro (o "+15 min"). Comparas tus horas reales por área contra tu prioridad — para confrontarte con la realidad.</div>
       <div class="card" style="margin-top:14px">
         <div class="bigtimer"><div class="num" id="tmNum">00:00</div><div class="cap" id="tmCap">Elige una capa</div></div>
         <div class="tcaps" id="tmCaps"></div>
@@ -487,6 +490,7 @@
       <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Sistema</button>
       <div class="kicker">Tu copiloto · basado en tus datos</div>
       <h1 class="big">¿Estás <em>alineado</em>?</h1>
+      <div class="modhelp"><b>¿Para qué sirve?</b> Es tu espejo de datos (sin IA). Lee lo que registras y te dice si vas alineado con tu norte: qué capa traes descuidada y si operas mejor con plan que sin él. El patrón, en una sola pantalla.</div>
       <div id="insList" style="margin-top:14px"></div>
       <p class="kicker" style="margin-top:16px;line-height:1.6">Análisis calculado directo de tus datos: tiempo, capas, disciplina y finanzas. Sin IA — pura matemática sobre lo que registras.</p>
     </section>
@@ -523,6 +527,7 @@
       <button class="backbtn" onclick="go('sistema')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Sistema</button>
       <div class="kicker">Diálogo interno</div>
       <h1 class="big">Tu <em>mente</em>.</h1>
+      <div class="modhelp"><b>¿Para qué sirve?</b> Nombrar tus fantasmas (Clyde, El Apurado…), las voces que te sabotean. Anótalas con el contexto en que salieron para cazarlas antes de romper tu plan. Se reprograman en Hipnosis y Autosugestión.</div>
       <div class="seclabel">Tus fantasmas</div><div id="ghostList"></div>
     </section>
 
