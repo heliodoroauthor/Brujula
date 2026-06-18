@@ -1,4 +1,4 @@
-const CACHE = 'brujula-v37';
+const CACHE = 'brujula-v38';
 const CORE = ['./', 'index.html', 'manifest.webmanifest', 'icon.svg'];
 
 self.addEventListener('install', e => {
